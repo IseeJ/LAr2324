@@ -1,3 +1,4 @@
+
 // Gmsh project created on Sat Feb 17 15:51:22 2024
 SetFactory("OpenCASCADE");
 
@@ -13,7 +14,7 @@ C = 1.87;
 E = 0.494;
 F = 0.2;
 
-lcDisk = 0.0025;
+lcDisk = 0.005;
 
 //---------------------------------------------
 // cathode
@@ -476,6 +477,62 @@ cathodegrid_cathode_1_3 = newc; Line(cathodegrid_cathode_1_3) = { cathodegrid_ou
 cathodegrid_cathode_1_4 = newc; Line(cathodegrid_cathode_1_4) = { cathodegrid_out_dl,cathode_out_du };
 
 
+// lines for rings surfaces
+
+// cgrid
+surfline_cgrid_au = newc; Line(surfline_cgrid_au) = {cathodegrid_in_au,cathodegrid_out_au};
+surfline_cgrid_bu = newc; Line(surfline_cgrid_bu) = {cathodegrid_in_bu,cathodegrid_out_bu};
+surfline_cgrid_cu = newc; Line(surfline_cgrid_cu) = {cathodegrid_in_cu,cathodegrid_out_cu};
+surfline_cgrid_du = newc; Line(surfline_cgrid_du) = {cathodegrid_in_du,cathodegrid_out_du};
+
+surfline_cgrid_al = newc; Line(surfline_cgrid_al) = {cathodegrid_in_al,cathodegrid_out_al};
+surfline_cgrid_bl = newc; Line(surfline_cgrid_bl) = {cathodegrid_in_bl,cathodegrid_out_bl};
+surfline_cgrid_cl = newc; Line(surfline_cgrid_cl) = {cathodegrid_in_cl,cathodegrid_out_cl};
+surfline_cgrid_dl = newc; Line(surfline_cgrid_dl) = {cathodegrid_in_dl,cathodegrid_out_dl};
+
+// agrid
+surfline_agrid_au = newc; Line(surfline_agrid_au) = {anodegrid_in_au,anodegrid_out_au};
+surfline_agrid_bu = newc; Line(surfline_agrid_bu) = {anodegrid_in_bu,anodegrid_out_bu};
+surfline_agrid_cu = newc; Line(surfline_agrid_cu) = {anodegrid_in_cu,anodegrid_out_cu};
+surfline_agrid_du = newc; Line(surfline_agrid_du) = {anodegrid_in_du,anodegrid_out_du};
+
+surfline_agrid_al = newc; Line(surfline_agrid_al) = {anodegrid_in_al,anodegrid_out_al};
+surfline_agrid_bl = newc; Line(surfline_agrid_bl) = {anodegrid_in_bl,anodegrid_out_bl};
+surfline_agrid_cl = newc; Line(surfline_agrid_cl) = {anodegrid_in_cl,anodegrid_out_cl};
+surfline_agrid_dl = newc; Line(surfline_agrid_dl) = {anodegrid_in_dl,anodegrid_out_dl};
+
+// ring 1
+surfline_ring1_au = newc; Line(surfline_ring1_au) = {ring1_in_au,ring1_out_au};
+surfline_ring1_bu = newc; Line(surfline_ring1_bu) = {ring1_in_bu,ring1_out_bu};
+surfline_ring1_cu = newc; Line(surfline_ring1_cu) = {ring1_in_cu,ring1_out_cu};
+surfline_ring1_du = newc; Line(surfline_ring1_du) = {ring1_in_du,ring1_out_du};
+
+surfline_ring1_al = newc; Line(surfline_ring1_al) = {ring1_in_al,ring1_out_al};
+surfline_ring1_bl = newc; Line(surfline_ring1_bl) = {ring1_in_bl,ring1_out_bl};
+surfline_ring1_cl = newc; Line(surfline_ring1_cl) = {ring1_in_cl,ring1_out_cl};
+surfline_ring1_dl = newc; Line(surfline_ring1_dl) = {ring1_in_dl,ring1_out_dl};
+
+// ring 2
+surfline_ring2_au = newc; Line(surfline_ring2_au) = {ring2_in_au,ring2_out_au};
+surfline_ring2_bu = newc; Line(surfline_ring2_bu) = {ring2_in_bu,ring2_out_bu};
+surfline_ring2_cu = newc; Line(surfline_ring2_cu) = {ring2_in_cu,ring2_out_cu};
+surfline_ring2_du = newc; Line(surfline_ring2_du) = {ring2_in_du,ring2_out_du};
+
+surfline_ring2_al = newc; Line(surfline_ring2_al) = {ring2_in_al,ring2_out_al};
+surfline_ring2_bl = newc; Line(surfline_ring2_bl) = {ring2_in_bl,ring2_out_bl};
+surfline_ring2_cl = newc; Line(surfline_ring2_cl) = {ring2_in_cl,ring2_out_cl};
+surfline_ring2_dl = newc; Line(surfline_ring2_dl) = {ring2_in_dl,ring2_out_dl};
+
+// ring 3
+surfline_ring3_au = newc; Line(surfline_ring3_au) = {ring3_in_au,ring3_out_au};
+surfline_ring3_bu = newc; Line(surfline_ring3_bu) = {ring3_in_bu,ring3_out_bu};
+surfline_ring3_cu = newc; Line(surfline_ring3_cu) = {ring3_in_cu,ring3_out_cu};
+surfline_ring3_du = newc; Line(surfline_ring3_du) = {ring3_in_du,ring3_out_du};
+
+surfline_ring3_al = newc; Line(surfline_ring3_al) = {ring3_in_al,ring3_out_al};
+surfline_ring3_bl = newc; Line(surfline_ring3_bl) = {ring3_in_bl,ring3_out_bl};
+surfline_ring3_cl = newc; Line(surfline_ring3_cl) = {ring3_in_cl,ring3_out_cl};
+surfline_ring3_dl = newc; Line(surfline_ring3_dl) = {ring3_in_dl,ring3_out_dl};
 
 
 //---------------------------------------------
@@ -489,8 +546,6 @@ rsanode_out_abcdu = newreg; Surface(rsanode_out_abcdu) = {llanode_out_abcdu};
 llanode_out_abcdl = newreg; Line Loop(llanode_out_abcdl) = {anode_out_aldl1, anode_out_dlbl2 , anode_out_blcl3, anode_out_clal4};
 rsanode_out_abcdl = newreg; Surface(rsanode_out_abcdl) = {llanode_out_abcdl};
 
-llanode_out_audu = newreg; Line Loop(llanode_out_audu) = {anode_out_audu1, anode_out_dubu2 , anode_out_bucu3, anode_out_cuau4};
-rsanode_out_audu = newreg; Surface(rsanode_out_audu) = {llanode_out_audu};
 
 llanode_out_audu = newreg; Line Loop(llanode_out_audu) = {anode_out_audu1, anode_out_dldu4 , anode_out_aldl1, anode_out_alau1};
 rsanode_out_audu = newreg; Surface(rsanode_out_audu) = {llanode_out_audu};
@@ -511,9 +566,6 @@ rscathode_out_abcdu = newreg; Surface(rscathode_out_abcdu) = {llcathode_out_abcd
 
 llcathode_out_abcdl = newreg; Line Loop(llcathode_out_abcdl) = {cathode_out_aldl1, cathode_out_dlbl2 , cathode_out_blcl3, cathode_out_clal4};
 rscathode_out_abcdl = newreg; Surface(rscathode_out_abcdl) = {llcathode_out_abcdl};
-
-llcathode_out_audu = newreg; Line Loop(llcathode_out_audu) = {cathode_out_audu1, cathode_out_dubu2 , cathode_out_bucu3, cathode_out_cuau4};
-rscathode_out_audu = newreg; Surface(rscathode_out_audu) = {llcathode_out_audu};
 
 llcathode_out_audu = newreg; Line Loop(llcathode_out_audu) = {cathode_out_audu1, cathode_out_dldu4 , cathode_out_aldl1, cathode_out_alau1};
 rscathode_out_audu = newreg; Surface(rscathode_out_audu) = {llcathode_out_audu};
