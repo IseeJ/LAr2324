@@ -578,3 +578,15 @@ rscathode_out_bucu = newreg; Surface(rscathode_out_bucu) = {llcathode_out_bucu};
 
 llcathode_out_cuau = newreg; Line Loop(llcathode_out_cuau) = {cathode_out_cuau4, cathode_out_alau1 , cathode_out_clal4, cathode_out_clcu3};
 rscathode_out_cuau = newreg; Surface(rscathode_out_cuau) = {llcathode_out_cuau};
+
+
+// Volumes
+sl_anode= newreg; Surface Loop(sl_anode) = {rsanode_out_abcdu,rsanode_out_audu, rsanode_out_dubu, rsanode_out_bucu, rsanode_out_cuau, rsanode_out_abcdl};
+vol_anode = newreg; Volume(vol_anode) = {sl_anode};
+
+
+
+// Physical surfaces
+// Surfaces to which voltages will be applied
+
+physsurf_anode = newreg; Physical Surface(physsurf_anode) = {rsanode_out_abcdu,rsanode_out_audu, rsanode_out_dubu, rsanode_out_bucu, rsanode_out_cuau, rsanode_out_abcdl};
