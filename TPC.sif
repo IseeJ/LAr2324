@@ -9,7 +9,7 @@ Check Keywords Warn
 
 ! Specify output folder and location.
 Header
-  Mesh DB "." "parallel_plate"
+  Mesh DB "." "TPC"
 End
 
 ! Details of the calculation and output files.
@@ -17,8 +17,8 @@ Simulation
   Coordinate System = Cartesian 3D
   Simulation Type = Steady State
   Steady State Max Iterations = 1
-  Output File = "parallel_plate.result"
-  Post File = "parallel_plate.ep"
+  Output File = "TPC.result"
+  Post File = "TPC.ep"
 End
 
 ! Define constants.
