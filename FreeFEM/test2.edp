@@ -26,7 +26,7 @@ int n=15;
 mesh Th = buildmesh(enclosure(3*n)+
              bottomA(-w2*n)+topA(-w2*n)+rightA(-h*n)+leftA(-h*n)+
              bottomK(-w2*n)+topK(-w2*n)+rightK(-h*n)+leftK(-h*n)+
-             bottomCG(-40*n)+topCG(-40*n)+rightCG(-42.6+A+E*n)+leftCG(-42.6+A+E*n)));
+             bottomCG(-40*n)+topCG(-40*n)+rightCG(-42.6+A+E*n)+leftCG(-42.6+A+E*n));
 
 fespace Vh(Th,P1);
 
