@@ -1,6 +1,6 @@
 int CA=3, CK=4, CG=5, CB=6; 
 
-// w2 disk radius, h disk thick, d2 separation in mm
+// w2 disk radius, h disk thick, d2 separation in cm
 real w2=4, h=0.26, d2=8.554, A=1.623, E=0.494;
 
 border bottomA(t=-w2,w2){ x=t; y=d2; label=CA;};
