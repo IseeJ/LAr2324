@@ -8,10 +8,10 @@ border rightA(t=d2,d2+h){ x=w2; y=t; label=CA;};
 border topA(t=w2,-w2){ x=t; y=d2+h; label=CA;};
 border leftA(t=d2+h,d2){ x=-w2; y=t; label=CA;};
 
-border bottomK(t=-w2,w2){ x=t; y=-d2-h; label=CK;};
-border rightK(t=-d2-h,-d2){ x=w2; y=t; label=CK;};
-border topK(t=w2,-w2){ x=t; y=-d2; label=CK;};
-border leftK(t=-d2,-d2-h){ x=-w2; y=t; label=CK;};
+border bottomK(t=-w2,w2){ x=t; y=0-h; label=CK;};
+border rightK(t=-h,0){ x=w2; y=t; label=CK;};
+border topK(t=w2,-w2){ x=t; y=0; label=CK;};
+border leftK(t=0,-h){ x=-w2; y=t; label=CK;};
 
 border enclosure(t=0,2*pi){x=50*cos(t); y=50*sin(t); label=CB;}
 
