@@ -1,9 +1,7 @@
-int CA=3, CK=4, CB=5; CCG=6;
-
-
+int CA=3, CK=4, CG=5, CB=6; 
 
 // w2 disk radius, h disk thick, d2 separation in mm
-real w2=40, h=2.6, d2=8.554; A=16.23; E=4.94;
+real w2=40, h=2.6, d2=8.554, A=16.23, E=4.94;
 
 border bottomA(t=-w2,w2){ x=t; y=d2; label=CA;};
 border rightA(t=d2,d2+h){ x=w2; y=t; label=CA;};
@@ -15,10 +13,10 @@ border rightK(t=-h,0){ x=w2; y=t; label=CK;};
 border topK(t=w2,-w2){ x=t; y=0; label=CK;};
 border leftK(t=0,-h){ x=-w2; y=t; label=CK;};
 
-border bottomCG(t=-40,42.6+A){ x=t; y=-40+2; label=CCG;};
-border rightCG(t=-40+2,42.6+A+E){ x=-40; y=t; label=CCG;};
-border topCG(t=-40,42.6+A){ x=t; y=42.6+A+E; label=CCG;};
-border leftCG(t=-40+2,42.6+A+E){ x=42.6+A; y=t; label=CCG;};
+border bottomG(t=-40,42.6+A){ x=t; y=-40+2; label=CG;};
+border rightG(t=-40+2,42.6+A+E){ x=-40; y=t; label=CG;};
+border topG(t=-40,42.6+A){ x=t; y=42.6+A+E; label=CG;};
+border leftG(t=-40+2,42.6+A+E){ x=42.6+A; y=t; label=CG;};
 
 border enclosure(t=0,2*pi){x=50*cos(t); y=50*sin(t); label=CB;}
 
@@ -26,7 +24,7 @@ int n=15;
 mesh Th = buildmesh(enclosure(3*n)+
              bottomA(-w2*n)+topA(-w2*n)+rightA(-h*n)+leftA(-h*n)+
              bottomK(-w2*n)+topK(-w2*n)+rightK(-h*n)+leftK(-h*n)+
-             bottomCG(-40*n)+topCG(-40*n)+rightCG(-42.6+A+E*n)+leftCG(-42.6+A+E*n));
+             bottomG(-40*n)+topG(-40*n)+rightG(-h*n)+leftG(-h*n));
 
 fespace Vh(Th,P1);
 
