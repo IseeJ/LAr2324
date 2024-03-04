@@ -10,32 +10,34 @@ border rightA(t=b+a+2*c+4*d+3*e+f,2*b+a+2*c+4*d+3*e+f){ x=o; y=t; label=CA;};
 border topA(t=-o,o){ x=t; y=2*b+a+2*c+4*d+3*e+f; label=CA;};
 border leftA(t=2*b+a+2*c+4*d+3*e+f,b+a+2*c+4*d+3*e+f){ x=-o; y=t; label=CA;};
 
+int CK=5;
 
+border bottomK(t=-o,o){ x=t; y=0; label=CK;};
+border rightK(t=0,b){ x=o; y=t; label=CK;};
+border topK(t=-o,o){ x=t; y=b; label=CK;};
+border leftK(t=b,0){ x=-o; y=t; label=CK;};
 
-
-int CDL=5;
+int CDL=6;
 
 border bottomDL(t=-o,-i){ x=t; y=b+a+c+4*d+3*e; label=CDL;};
 border rightDL(t=b+a+c+4*d+3*e,b+a+2*c+4*d+3*e){ x=-i; y=t; label=CDL;};
 border topDL(t=-o,-i){ x=t; y=b+a+2*c+4*d+3*e; label=CDL;};
 border leftDL(t=b+a+2*c+4*d+3*e,b+a+c+4*d+3*e){ x=-o; y=t; label=CDL;};
 
-
-
-
-int CDR=6;
+int CDR=7;
 
 border bottomDR(t=i,o){ x=t; y=b+a+c+4*d+3*e; label=CDR;};
 border rightDR(t=b+a+c+4*d+3*e,b+a+2*c+4*d+3*e){ x=o; y=t; label=CDR;};
 border topDR(t=i,o){ x=t; y=b+a+2*c+4*d+3*e; label=CDR;};
 border leftDR(t=b+a+2*c+4*d+3*e,b+a+c+4*d+3*e){ x=i; y=t; label=CDR;};
 
-
 border enclosure(t=0,2*pi){x=10*cos(t); y=10*sin(t); label=CB;}
 
 int n=15;
 mesh Th = buildmesh(enclosure(3*n)+
 bottomA(-(-o)*n)+topA(-(-o)*n)+rightA(-(2*b+a+2*c+4*d+3*e+f)*n)+leftA(-(2*b+a+2*c+4*d+3*e+f)*n))
++
+bottomK(-(-o)*n)+topK(-(-o)*n)+rightK(-(b)*n)+leftK(-(b)*n))
 +
 bottomDL(-(-o)*n)+topDL(-(-o)*n)+rightDL(-(b+a+2*c+4*d+3*e)*n)+leftDL(-(b+a+2*c+4*d+3*e)*n))
 +
