@@ -2,39 +2,48 @@ int CB=3;
 real a = 1.623, b = 0.26, c = 0.494, d = 1.09, E= 0.2, f = 0.983, o=4, r=2;
 
 int CA=4;
-
 border bottomA(t=-o,o){ x=t; y=b+a+2*c+4*d+3*E+f; label=CA;};
 border rightA(t=b+a+2*c+4*d+3*E+f,2*b+a+2*c+4*d+3*E+f){ x=o; y=t; label=CA;};
 border topA(t=o,-o){ x=t; y=2*b+a+2*c+4*d+3*E+f; label=CA;};
 border leftA(t=2*b+a+2*c+4*d+3*E+f,b+a+2*c+4*d+3*E+f){ x=-o; y=t; label=CA;};
 
 int CK=5;
-
 border bottomK(t=-o,o){ x=t; y=0; label=CK;};
 border rightK(t=0,b){ x=o; y=t; label=CK;};
 border topK(t=o,-o){ x=t; y=b; label=CK;};
 border leftK(t=b,0){ x=-o; y=t; label=CK;};
 
 int CDL=6;
-
 border bottomL(t=-o,-r){ x=t; y=b+a+c+4*d+3*E; label=CDL;};
 border rightL(t=b+a+c+4*d+3*E,b+a+2*c+4*d+3*E){ x=-r; y=t; label=CDL;};
 border topL(t=-r,-o){ x=t; y=b+a+2*c+4*d+3*E; label=CDL;};
 border leftL(t=b+a+2*c+4*d+3*E,b+a+c+4*d+3*E){ x=-o; y=t; label=CDL;};
 
-
 int CDR=7;
-
 border bottomDR(t=r,o){ x=t; y=b+a+c+4*d+3*E; label=CDR;};
 border rightDR(t=b+a+c+4*d+3*E,b+a+2*c+4*d+3*E){ x=o; y=t; label=CDR;};
 border topDR(t=o,r){ x=t; y=b+a+2*c+4*d+3*E; label=CDR;};
 border leftDR(t=b+a+2*c+4*d+3*E,b+a+c+4*d+3*E){ x=r; y=t; label=CDR;};
 
+int CEL=8;
+border bottomEL(t=-Or,-Ir){ x=t; y=b+a+c+3*d+3*e; label=CEL;};
+border rightEL(t=b+a+c+3*d+3*e,b+a+c+3*d+2*e){ x=-Ir; y=t; label=CEL;};
+border topEL(t=-Ir,-Or){ x=t; y=b+a+c+3*d+2*e; label=CEL;};
+border leftEL(t=b+a+c+3*d+2*e,b+a+c+3*d+3*e){ x=-Or; y=t; label=CEL;};
+
+int CER=9;
+border bottomER(t=Ir,Or){ x=t; y=b+a+c+3*d+3*e; label=CER;};
+border rightER(t=b+a+c+3*d+3*e,b+a+c+3*d+2*e){ x=Or; y=t; label=CER;};
+border topER(t=Or,Ir){ x=t; y=b+a+c+3*d+2*e; label=CER;};
+border leftER(t=b+a+c+3*d+2*e,b+a+c+3*d+3*e){ x=Ir; y=t; label=CER;};
+
+
 border EnCDLosure(t=0,2*pi){x=10*cos(t); y=10*sin(t); label=CB;};
+
 
 int n=10;
 
-mesh Th = buildmesh(EnCDLosure(3*n)+bottomA(-o*n)+topA(-o*n)+rightA(-(2*b+a+2*c+4*d+3*E+f)*n)+leftA(-(2*b+a+2*c+4*d+3*E+f)*n)+bottomK(-o*n)+topK(-o*n)+rightK(-b*n)+leftK(-b*n)+bottomL(-r*n)+topL(-r*n)+rightL(-(b+a+2*c+4*d+3*E)*n)+leftL(-(b+a+2*c+4*d+3*E)*n)+bottomDR(-r*n)+topDR(-r*n)+rightDR(-(b+a+2*c+4*d+3*E)*n)+leftDR(-(b+a+2*c+4*d+3*E)*n));
+mesh Th = buildmesh(EnCDLosure(3*n)+bottomA(-o*n)+topA(-o*n)+rightA(-(2*b+a+2*c+4*d+3*E+f)*n)+leftA(-(2*b+a+2*c+4*d+3*E+f)*n)+bottomK(-o*n)+topK(-o*n)+rightK(-b*n)+leftK(-b*n)+bottomL(-r*n)+topL(-r*n)+rightL(-(b+a+2*c+4*d+3*E)*n)+leftL(-(b+a+2*c+4*d+3*E)*n)+bottomDR(-r*n)+topDR(-r*n)+rightDR(-(b+a+2*c+4*d+3*E)*n)+leftDR(-(b+a+2*c+4*d+3*E)*n) + bottomEL(-Or*n)+topEL(-Or*n)+rightEL(-(b+a+c+3*d+2*e)*n)+leftEL(-(b+a+c+3*d+2*e)*n)) + bottomER(Ir*n)+topER(Ir*n)+rightER(-(b+a+c+3*d+2*e)*n)+leftER(-(b+a+c+3*d+2*e)*n)));
 
 
 fespace Vh(Th,P1);
@@ -44,7 +53,7 @@ real u0=100;
 
 problem Electro(u,v) =
           int2d(Th)(dx(u)*dx(v) + dy(u)*dy(v))
-        + on(CA,u=u0)+on(CK,u=0)+on(CDL,u=0)+on(CDR,u=0);
+        + on(CA,u=u0)+on(CK,u=0)+on(CDL,u=0)+on(CDR,u=0)+on(CER,u=0)+on(CEL,u=0);
 
 real error=0.01;
 for (int i=0;i<1;i++){
