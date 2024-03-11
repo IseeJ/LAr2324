@@ -77,8 +77,7 @@ border leftFR(t=h1+w1+w2+2*w3+h2,h1+w1+w2+2*w3+2*h2){ x=r; y=t; label=CFR;};
 
 border enclosure(t=0,2*pi){x=10*cos(t); y=10*sin(t); label=CB;}
 int n=15;
-mesh Th = buildmesh(enclosure(3*n)+bottomA(-o*n)+topA(-o*n)+rightA(-(2*h1+w1+2*w2+4*w3+3*h2+w4)*n)+leftA(-(2*h1+w1+2*w2+4*w3+3*h2+w4)*n)+bottomK(-o*n)+topK(-o*n)+rightK(-(h1)*n)+leftK(-(h1)*n)+bottomDL(-o*n)+topDL(-o*n)+rightDL(-(h1+w1+2*w2+4*w3+3*h2)*n)+leftDL(-(h1+w1+2*w2+4*w3+3*h2)*n)+bottomDR(r*n)+topDR(r*n)+rightDR(-(h1+w1+2*w2+4*w3+3*h2)*n)+leftDR(-(h1+w1+2*w2+4*w3+3*h2)*n)+bottomEL(-o*n)+topEL(-o*n)+rightEL(-(h1+w1+w2+3*w3+2*h2)*n)+leftEL(-(h1+w1+w2+3*w3+2*h2)*n)+bottomER(r*n)+topER(r*n)+rightER(-(h1+w1+w2+3*w3+2*h2)*n)+leftER(-(h1+w1+w2+3*w3+2*h2)*n)+bottomFL(-o*n)+topFL(-o*n)+rightFL(-(h1+w1+w2+2*w3+h2)*n)+leftFL(-(h1+w1+w2+2*w3+h2)*n)+bottomFR(r*n)+topFR(r*n)+rightFR(-(h1+w1+w2+2*w3+h2)*n)+leftFR(-(h1+w1+w2+2*w3+h2)*n))
-['CA', 'CK', 'CDL', 'CDR', 'CEL', 'CER', 'CFL', 'CFR']
+mesh Th = buildmesh(enclosure(3*n)+bottomA(-o*n)+topA(-o*n)+rightA(-(2*h1+w1+2*w2+4*w3+3*h2+w4)*n)+leftA(-(2*h1+w1+2*w2+4*w3+3*h2+w4)*n)+bottomK(-o*n)+topK(-o*n)+rightK(-(h1)*n)+leftK(-(h1)*n)+bottomDL(-o*n)+topDL(-o*n)+rightDL(-(h1+w1+2*w2+4*w3+3*h2)*n)+leftDL(-(h1+w1+2*w2+4*w3+3*h2)*n)+bottomDR(r*n)+topDR(r*n)+rightDR(-(h1+w1+2*w2+4*w3+3*h2)*n)+leftDR(-(h1+w1+2*w2+4*w3+3*h2)*n)+bottomEL(-o*n)+topEL(-o*n)+rightEL(-(h1+w1+w2+3*w3+2*h2)*n)+leftEL(-(h1+w1+w2+3*w3+2*h2)*n)+bottomER(r*n)+topER(r*n)+rightER(-(h1+w1+w2+3*w3+2*h2)*n)+leftER(-(h1+w1+w2+3*w3+2*h2)*n)+bottomFL(-o*n)+topFL(-o*n)+rightFL(-(h1+w1+w2+2*w3+h2)*n)+leftFL(-(h1+w1+w2+2*w3+h2)*n)+bottomFR(r*n)+topFR(r*n)+rightFR(-(h1+w1+w2+2*w3+h2)*n)+leftFR(-(h1+w1+w2+2*w3+h2)*n));
 
 fespace Vh(Th,P1);
 Vh u,v;
