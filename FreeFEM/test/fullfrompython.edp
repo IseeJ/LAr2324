@@ -1,3 +1,4 @@
+
 int CB=3;
 real w1 = 1.623, h1 = 0.26, w2 = 0.494, w3 = 1.09, h2 = 0.2, w4 = 0.983, o=4, r=2;
 
@@ -93,32 +94,32 @@ border leftGR(t=h1+w1+w2+w3,h1+w1+w2+w3+h2){ x=r; y=t; label=CGR;};
 
   
 
-int CGL=14;
+int CHL=14;
 
-border bottomGL(t=-o,-r){ x=t; y=h1+w1+w2; label=CGL;};
-border rightGL(t=h1+w1+w2,h1+w1){ x=-r; y=t; label=CGL;};
-border topGL(t=-r,-o){ x=t; y=h1+w1; label=CGL;};
-border leftGL(t=h1+w1,h1+w1+w2){ x=-o; y=t; label=CGL;};
+border bottomHL(t=-o,-r){ x=t; y=h1+w1+w2; label=CHL;};
+border rightHL(t=h1+w1+w2,h1+w1){ x=-r; y=t; label=CHL;};
+border topHL(t=-r,-o){ x=t; y=h1+w1; label=CHL;};
+border leftHL(t=h1+w1,h1+w1+w2){ x=-o; y=t; label=CHL;};
 
   
 
-int CGR=15;
+int CHR=15;
 
-border bottomGR(t=r,o){ x=t; y=h1+w1+w2; label=CGR;};
-border rightGR(t=h1+w1+w2,h1+w1){ x=o; y=t; label=CGR;};
-border topGR(t=o,r){ x=t; y=h1+w1; label=CGR;};
-border leftGR(t=h1+w1,h1+w1+w2){ x=r; y=t; label=CGR;};
+border bottomHR(t=r,o){ x=t; y=h1+w1+w2; label=CHR;};
+border rightHR(t=h1+w1+w2,h1+w1){ x=o; y=t; label=CHR;};
+border topHR(t=o,r){ x=t; y=h1+w1; label=CHR;};
+border leftHR(t=h1+w1,h1+w1+w2){ x=r; y=t; label=CHR;};
 
   
 
 border enclosure(t=0,2*pi){x=10*cos(t); y=10*sin(t); label=CB;}
 int n=15;
-mesh Th = buildmesh(enclosure(3*n)+bottomA(-o*n)+topA(-o*n)+rightA(-(2*h1+w1+2*w2+4*w3+3*h2+w4)*n)+leftA(-(2*h1+w1+2*w2+4*w3+3*h2+w4)*n)+bottomK(-o*n)+topK(-o*n)+rightK(-(h1)*n)+leftK(-(h1)*n)+bottomDL(-o*n)+topDL(-o*n)+rightDL(-(h1+w1+2*w2+4*w3+3*h2)*n)+leftDL(-(h1+w1+2*w2+4*w3+3*h2)*n)+bottomDR(r*n)+topDR(r*n)+rightDR(-(h1+w1+2*w2+4*w3+3*h2)*n)+leftDR(-(h1+w1+2*w2+4*w3+3*h2)*n)+bottomEL(-o*n)+topEL(-o*n)+rightEL(-(h1+w1+w2+3*w3+2*h2)*n)+leftEL(-(h1+w1+w2+3*w3+2*h2)*n)+bottomER(r*n)+topER(r*n)+rightER(-(h1+w1+w2+3*w3+2*h2)*n)+leftER(-(h1+w1+w2+3*w3+2*h2)*n)+bottomFL(-o*n)+topFL(-o*n)+rightFL(-(h1+w1+w2+2*w3+h2)*n)+leftFL(-(h1+w1+w2+2*w3+h2)*n)+bottomFR(r*n)+topFR(r*n)+rightFR(-(h1+w1+w2+2*w3+h2)*n)+leftFR(-(h1+w1+w2+2*w3+h2)*n)+bottomGL(-o*n)+topGL(-o*n)+rightGL(-(h1+w1+w2+w3)*n)+leftGL(-(h1+w1+w2+w3)*n)+bottomGR(r*n)+topGR(r*n)+rightGR(-(h1+w1+w2+w3)*n)+leftGR(-(h1+w1+w2+w3)*n)+bottomGL(-o*n)+topGL(-o*n)+rightGL(-(h1+w1)*n)+leftGL(-(h1+w1)*n)+bottomGR(r*n)+topGR(r*n)+rightGR(-(h1+w1)*n)+leftGR(-(h1+w1)*n))
+mesh Th = buildmesh(enclosure(3*n)+bottomA(-o*n)+topA(-o*n)+rightA(-(2*h1+w1+2*w2+4*w3+3*h2+w4)*n)+leftA(-(2*h1+w1+2*w2+4*w3+3*h2+w4)*n)+bottomK(-o*n)+topK(-o*n)+rightK(-(h1)*n)+leftK(-(h1)*n)+bottomDL(-o*n)+topDL(-o*n)+rightDL(-(h1+w1+2*w2+4*w3+3*h2)*n)+leftDL(-(h1+w1+2*w2+4*w3+3*h2)*n)+bottomDR(r*n)+topDR(r*n)+rightDR(-(h1+w1+2*w2+4*w3+3*h2)*n)+leftDR(-(h1+w1+2*w2+4*w3+3*h2)*n)+bottomEL(-o*n)+topEL(-o*n)+rightEL(-(h1+w1+w2+3*w3+2*h2)*n)+leftEL(-(h1+w1+w2+3*w3+2*h2)*n)+bottomER(r*n)+topER(r*n)+rightER(-(h1+w1+w2+3*w3+2*h2)*n)+leftER(-(h1+w1+w2+3*w3+2*h2)*n)+bottomFL(-o*n)+topFL(-o*n)+rightFL(-(h1+w1+w2+2*w3+h2)*n)+leftFL(-(h1+w1+w2+2*w3+h2)*n)+bottomFR(r*n)+topFR(r*n)+rightFR(-(h1+w1+w2+2*w3+h2)*n)+leftFR(-(h1+w1+w2+2*w3+h2)*n)+bottomGL(-o*n)+topGL(-o*n)+rightGL(-(h1+w1+w2+w3)*n)+leftGL(-(h1+w1+w2+w3)*n)+bottomGR(r*n)+topGR(r*n)+rightGR(-(h1+w1+w2+w3)*n)+leftGR(-(h1+w1+w2+w3)*n)+bottomHL(-o*n)+topHL(-o*n)+rightHL(-(h1+w1)*n)+leftHL(-(h1+w1)*n)+bottomHR(r*n)+topHR(r*n)+rightHR(-(h1+w1)*n)+leftHR(-(h1+w1)*n))
 
 fespace Vh(Th,P1);
 Vh u,v;
 real u0=1000;
-problem Electro(u,v) = int2d(Th)(dx(u)*dx(v) + dy(u)*dy(v))+on(CA, u=0)+on(CK, u=0)+on(CDL, u=0)+on(CDR, u=0)+on(CEL, u=0)+on(CER, u=0)+on(CFL, u=0)+on(CFR, u=0)+on(CGL, u=0)+on(CGR, u=0)+on(CGL, u=0)+on(CGR, u=0);
+problem Electro(u,v) = int2d(Th)(dx(u)*dx(v) + dy(u)*dy(v))+on(CA, u=0)+on(CK, u=0)+on(CDL, u=0)+on(CDR, u=0)+on(CEL, u=0)+on(CER, u=0)+on(CFL, u=0)+on(CFR, u=0)+on(CGL, u=0)+on(CGR, u=0)+on(CHL, u=0)+on(CHR, u=0);
 real error=0.01;
 for (int i=0;i<1;i++){
    Electro;
