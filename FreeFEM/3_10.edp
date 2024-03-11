@@ -33,12 +33,25 @@ border topDR(t=Or,Ir){ x=t; y=h1+w1+2*w2+4*w3+3*h2; label=CDR;};
 border leftDR(t=h1+w1+2*w2+4*w3+3*h2,h1+w1+w2+4*w3+3*h2){ x=Ir; y=t; label=CDR;};
 
 
+int CEL=8;
+
+border bottomEL(t=-Or,-Ir){ x=t; y=b+a+c+3*d+3*e; label=CEL;};
+border rightEL(t=b+a+c+3*d+3*e,b+a+c+3*d+2*e){ x=-Ir; y=t; label=CEL;};
+border topEL(t=-Ir,-Or){ x=t; y=b+a+c+3*d+2*e; label=CEL;};
+border leftEL(t=b+a+c+3*d+2*e,b+a+c+3*d+3*e){ x=-Or; y=t; label=CEL;};
+
+
+int CER=9;
+border bottomER(t=Ir,Or){ x=t; y=b+a+c+3*d+3*e; label=CER;};
+border rightER(t=b+a+c+3*d+3*e,b+a+c+3*d+2*e){ x=Or; y=t; label=CER;};
+border topER(t=Or,Ir){ x=t; y=b+a+c+3*d+2*e; label=CER;};
+border leftER(t=b+a+c+3*d+2*e,b+a+c+3*d+3*e){ x=Ir; y=t; label=CER;};
 
 
 border EnCDLosure(t=0,2*pi){x=10*cos(t); y=10*sin(t); label=CB;};
 int n=10;
 
-mesh Th = buildmesh(EnCDLosure(3*n)+ bottomA(-Or*n)+topA(-Or*n)+rightA(-(2*b+a+2*c+4*d+3*e+f)*n)+leftA(-(2*b+a+2*c+4*d+3*e+f)*n)) + bottomK(-Or*n)+topK(-Or*n)+rightK(-(h1)*n)+leftK(-(h1)*n)) + bottomDL(-Or*n)+topDL(-Or*n)+rightDL(-(h1+w1+2*w2+4*w3+3*h2)*n)+leftDL(-(h1+w1+2*w2+4*w3+3*h2)*n)) + bottomDR(Ir*n)+topDR(Ir*n)+rightDR(-(h1+w1+2*w2+4*w3+3*h2)*n)+leftDR(-(h1+w1+2*w2+4*w3+3*h2)*n))) 
+mesh Th = buildmesh(EnCDLosure(3*n)+ bottomA(-Or*n)+topA(-Or*n)+rightA(-(2*b+a+2*c+4*d+3*e+f)*n)+leftA(-(2*b+a+2*c+4*d+3*e+f)*n)) + bottomK(-Or*n)+topK(-Or*n)+rightK(-(h1)*n)+leftK(-(h1)*n)) + bottomDL(-Or*n)+topDL(-Or*n)+rightDL(-(h1+w1+2*w2+4*w3+3*h2)*n)+leftDL(-(h1+w1+2*w2+4*w3+3*h2)*n)) + bottomDR(Ir*n)+topDR(Ir*n)+rightDR(-(h1+w1+2*w2+4*w3+3*h2)*n)+leftDR(-(h1+w1+2*w2+4*w3+3*h2)*n)) + bottomEL(-Or*n)+topEL(-Or*n)+rightEL(-(b+a+c+3*d+2*e)*n)+leftEL(-(b+a+c+3*d+2*e)*n)) + bottomER(Ir*n)+topER(Ir*n)+rightER(-(b+a+c+3*d+2*e)*n)+leftER(-(b+a+c+3*d+2*e)*n))) 
 
 fespace Vh(Th,P1);
 
@@ -47,7 +60,7 @@ real u0=1000;
 
 problem Electro(u,v) =
           int2d(Th)(dx(u)*dx(v) + dy(u)*dy(v))
-        + on(CA,u=u0)+on(CK,u=-u0)+on(CDL,u=0)+on(CDR,u=0);
+        + on(CA,u=u0)+on(CK,u=-u0)+on(CDL,u=0)+on(CDR,u=0)+on(CER,u=0)+on(CEL,u=0);
 
 real error=0.01;
 for (int i=0;i<1;i++){
