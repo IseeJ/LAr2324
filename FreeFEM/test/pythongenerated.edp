@@ -1,0 +1,99 @@
+int CB=3;
+real w1 = 1.623, h1 = 0.26, w2 = 0.494, w3 = 1.09, h2 = 0.2, w4 = 0.983, o=4, r=2;
+
+
+
+int CA=4;
+  
+border bottomA(t=-o,o){ x=t; y=h1+w1+2*w2+4*w3+3*h2+w4; label=CA;};
+border rightA(t=h1+w1+2*w2+4*w3+3*h2+w4,2*h1+w1+2*w2+4*w3+3*h2+w4){ x=o; y=t; label=CA;};
+border topA(t=o,-o){ x=t; y=2*h1+w1+2*w2+4*w3+3*h2+w4; label=CA;};
+border leftA(t=2*h1+w1+2*w2+4*w3+3*h2+w4,h1+w1+2*w2+4*w3+3*h2+w4){ x=-o; y=t; label=CA;};
+
+  
+
+int CK=5;
+  
+border bottomK(t=-o,o){ x=t; y=0; label=CK;};
+border rightK(t=0,h1){ x=o; y=t; label=CK;};
+border topK(t=o,-o){ x=t; y=h1; label=CK;};
+border leftK(t=h1,0){ x=-o; y=t; label=CK;};
+
+  
+
+int CDL=6;
+  
+border bottomDL(t=-o,-r){ x=t; y=h1+w1+w2+4*w3+3*h2; label=CDL;};
+border rightDL(t=h1+w1+w2+4*w3+3*h2,h1+w1+2*w2+4*w3+3*h2){ x=-r; y=t; label=CDL;};
+border topDL(t=-r,-o){ x=t; y=h1+w1+2*w2+4*w3+3*h2; label=CDL;};
+border leftDL(t=h1+w1+2*w2+4*w3+3*h2,h1+w1+w2+4*w3+3*h2){ x=-o; y=t; label=CDL;};
+
+  
+
+int CDR=7;
+  
+border bottomDR(t=r,o){ x=t; y=h1+w1+w2+4*w3+3*h2; label=CDR;};
+border rightDR(t=h1+w1+w2+4*w3+3*h2,h1+w1+2*w2+4*w3+3*h2){ x=o; y=t; label=CDR;};
+border topDR(t=o,r){ x=t; y=h1+w1+2*w2+4*w3+3*h2; label=CDR;};
+border leftDR(t=h1+w1+2*w2+4*w3+3*h2,h1+w1+w2+4*w3+3*h2){ x=r; y=t; label=CDR;};
+
+  
+
+int CEL=8;
+  
+border bottomEL(t=-o,-r){ x=t; y=h1+w1+w2+3*w3+3*h2; label=CEL;};
+border rightEL(t=h1+w1+w2+3*w3+3*h2,h1+w1+w2+3*w3+2*h2){ x=-r; y=t; label=CEL;};
+border topEL(t=-r,-o){ x=t; y=h1+w1+w2+3*w3+2*h2; label=CEL;};
+border leftEL(t=h1+w1+w2+3*w3+2*h2,h1+w1+w2+3*w3+3*h2){ x=-o; y=t; label=CEL;};
+
+  
+
+int CER=9;
+  
+border bottomER(t=r,o){ x=t; y=h1+w1+w2+3*w3+3*h2; label=CER;};
+border rightER(t=h1+w1+w2+3*w3+3*h2,h1+w1+w2+3*w3+2*h2){ x=o; y=t; label=CER;};
+border topER(t=o,r){ x=t; y=h1+w1+w2+3*w3+2*h2; label=CER;};
+border leftER(t=h1+w1+w2+3*w3+2*h2,h1+w1+w2+3*w3+3*h2){ x=r; y=t; label=CER;};
+
+  
+
+int CFL=10;
+  
+border bottomFL(t=-o,-r){ x=t; y=h1+w1+w2+2*w3+2*h2; label=CFL;};
+border rightFL(t=h1+w1+w2+2*w3+2*h2,h1+w1+w2+2*w3+h2){ x=-r; y=t; label=CFL;};
+border topFL(t=-r,-o){ x=t; y=h1+w1+w2+2*w3+h2; label=CFL;};
+border leftFL(t=h1+w1+w2+2*w3+h2,h1+w1+w2+2*w3+2*h2){ x=-o; y=t; label=CFL;};
+
+  
+
+int CFR=11;
+  
+border bottomFR(t=r,o){ x=t; y=h1+w1+w2+2*w3+2*h2; label=CFR;};
+border rightFR(t=h1+w1+w2+2*w3+2*h2,h1+w1+w2+2*w3+h2){ x=o; y=t; label=CFR;};
+border topFR(t=o,r){ x=t; y=h1+w1+w2+2*w3+h2; label=CFR;};
+border leftFR(t=h1+w1+w2+2*w3+h2,h1+w1+w2+2*w3+2*h2){ x=r; y=t; label=CFR;};
+
+  
+
+border enclosure(t=0,2*pi){x=10*cos(t); y=10*sin(t); label=CB;}
+int n=15;
+mesh Th = buildmesh(enclosure(3*n)+bottomA(-o*n)+topA(-o*n)+rightA(-(2*h1+w1+2*w2+4*w3+3*h2+w4)*n)+leftA(-(2*h1+w1+2*w2+4*w3+3*h2+w4)*n)+bottomK(-o*n)+topK(-o*n)+rightK(-(h1)*n)+leftK(-(h1)*n)+bottomDL(-o*n)+topDL(-o*n)+rightDL(-(h1+w1+2*w2+4*w3+3*h2)*n)+leftDL(-(h1+w1+2*w2+4*w3+3*h2)*n)+bottomDR(r*n)+topDR(r*n)+rightDR(-(h1+w1+2*w2+4*w3+3*h2)*n)+leftDR(-(h1+w1+2*w2+4*w3+3*h2)*n)+bottomEL(-o*n)+topEL(-o*n)+rightEL(-(h1+w1+w2+3*w3+2*h2)*n)+leftEL(-(h1+w1+w2+3*w3+2*h2)*n)+bottomER(r*n)+topER(r*n)+rightER(-(h1+w1+w2+3*w3+2*h2)*n)+leftER(-(h1+w1+w2+3*w3+2*h2)*n)+bottomFL(-o*n)+topFL(-o*n)+rightFL(-(h1+w1+w2+2*w3+h2)*n)+leftFL(-(h1+w1+w2+2*w3+h2)*n)+bottomFR(r*n)+topFR(r*n)+rightFR(-(h1+w1+w2+2*w3+h2)*n)+leftFR(-(h1+w1+w2+2*w3+h2)*n))
+['CA', 'CK', 'CDL', 'CDR', 'CEL', 'CER', 'CFL', 'CFR']
+
+fespace Vh(Th,P1);
+Vh u,v;
+real u0=1000;
+problem Electro(u,v) = int2d(Th)(dx(u)*dx(v) + dy(u)*dy(v))+on(CA, u=0)+on(CK, u=0)+on(CDL, u=0)+on(CDR, u=0)+on(CEL, u=0)+on(CER, u=0)+on(CFL, u=0)+on(CFR, u=0);
+real error=0.01;
+for (int i=0;i<1;i++){
+   Electro;
+   Th=adaptmesh(Th,u,err=error);
+   error=error/2.0;
+}
+Electro;
+
+Vh Ex, Ey;
+Ex = -dx(u);
+Ey = -dy(u);
+
+plot(u,value=true);
