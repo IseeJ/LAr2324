@@ -73,7 +73,7 @@ Vh u,v;
 real u0=1000;
 problem Electro(u,v) = int2d(Th)(dx(u)*dx(v) + dy(u)*dy(v))"""
     for label in label_list:
-      script+="+on("+label+"u=0)"
+      script+="+on("+label+", u=0)"
     script+=";"
     script+= """real error=0.01;
 for (int i=0;i<1;i++){
