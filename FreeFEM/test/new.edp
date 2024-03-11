@@ -55,15 +55,13 @@ border rightG(t=h1+w1+w2+3*w3+3*h2,h1+w1+w2+3*w3+2*h2){ x=o; y=t; label=CG;};
 border topG(t=o,r){ x=t; y=h1+w1+w2+3*w3+2*h2; label=CG;};
 border leftG(t=h1+w1+w2+3*w3+2*h2,h1+w1+w2+3*w3+3*h2){ x=r; y=t; label=CG;};
 
-bottomG(r*n)+topG(r*n)+rightG(-(h1+w1+w2+3*w3+2*h2)*n)+leftG(-(h1+w1+w2+3*w3+2*h2)*n)
-
 
 
 border enclosure(t=0,2*pi){x=10*cos(t); y=10*sin(t); label=CB;};
 
 int n=10;
 
-mesh Th = buildmesh(enclosure(3*n)+bottomA(-o*n)+topA(-o*n)+rightA(-(2*h1+w1+2*w2+4*w3+3*h2+w4)*n)+leftA(-(2*h1+w1+2*w2+4*w3+3*h2+w4)*n)+bottomD(-o*n)+ topD(-o*n)+rightD(-(h1+w1+2*w2+4*w3+3*h2)*n)+leftD(-(h1+w1+2*w2+4*w3+3*h2)*n)+bottomE(r*n)+topE(r*n)+rightE(-(h1+w1+2*w2+4*w3+3*h2)*n)+leftE(-(h1+w1+2*w2+4*w3+3*h2)*n)+bottomK(-o*n)+topK(-o*n)+rightK(-(h1)*n)+leftK(-(h1)*n) bottomF(-o*n)+topF(-o*n)+rightF(-(h1+w1+w2+3*w3+2*h2)*n)+leftF(-(h1+w1+w2+3*w3+2*h2)*n) + bottomF(-o*n)+topF(-o*n)+rightF(-(h1+w1+w2+3*w3+2*h2)*n)+leftF(-(h1+w1+w2+3*w3+2*h2)*n));
+mesh Th = buildmesh(enclosure(3*n)+bottomA(-o*n)+topA(-o*n)+rightA(-(2*h1+w1+2*w2+4*w3+3*h2+w4)*n)+leftA(-(2*h1+w1+2*w2+4*w3+3*h2+w4)*n)+bottomD(-o*n)+ topD(-o*n)+rightD(-(h1+w1+2*w2+4*w3+3*h2)*n)+leftD(-(h1+w1+2*w2+4*w3+3*h2)*n)+bottomE(r*n)+topE(r*n)+rightE(-(h1+w1+2*w2+4*w3+3*h2)*n)+leftE(-(h1+w1+2*w2+4*w3+3*h2)*n)+bottomK(-o*n)+topK(-o*n)+rightK(-(h1)*n)+leftK(-(h1)*n) + bottomF(-o*n)+topF(-o*n)+rightF(-(h1+w1+w2+3*w3+2*h2)*n)+leftF(-(h1+w1+w2+3*w3+2*h2)*n)+bottomG(r*n)+topG(r*n)+rightG(-(h1+w1+w2+3*w3+2*h2)*n)+leftG(-(h1+w1+w2+3*w3+2*h2)*n));
 fespace Vh(Th,P1);
 
 Vh u,v;
@@ -71,7 +69,7 @@ real u0=1000;
 
 problem Electro(u,v) =
           int2d(Th)(dx(u)*dx(v) + dy(u)*dy(v))
-        + on(CA,u=u0)+on(CK,u=-u0)+on(CD,u=0)+on(CE,u=0);
+        + on(CA,u=u0)+on(CK,u=-u0)+on(CD,u=0)+on(CE,u=0)+on(CF,u=0)+on(CG,u=0);
 
 real error=0.01;
 for (int i=0;i<1;i++){
