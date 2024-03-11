@@ -1,29 +1,50 @@
 int CB=3;
-real w1 = 1.623, h1 = 0.26, w2 = 0.494, w3 = 1.09, h2 = 0.2, w4 = 0.983, Or=4, Ir=2;
+real w1 = 1.623, h1 = 0.26, w2 = 0.494, w3 = 1.09, h2 = 0.2, w4 = 0.983, o=4, r=2;
 
 
 
 int CA=4;
 
-border bottomA(t=-Or,Or){ x=t; y=h1+w1+2*w2+4*w3+3*h2+w4; label=CA;};
-border rightA(t=h1+w1+2*w2+4*w3+3*h2+w4,2*h1+w1+2*w2+4*w3+3*h2+w4){ x=Or; y=t; label=CA;};
-border topA(t=Or,-Or){ x=t; y=2*h1+w1+2*w2+4*w3+3*h2+w4; label=CA;};
-border leftA(t=2*h1+w1+2*w2+4*w3+3*h2+w4,h1+w1+2*w2+4*w3+3*h2+w4){ x=-Or; y=t; label=CA;};
+border bottomA(t=-o,o){ x=t; y=h1+w1+2*w2+4*w3+3*h2+w4; label=CA;};
+border rightA(t=h1+w1+2*w2+4*w3+3*h2+w4,2*h1+w1+2*w2+4*w3+3*h2+w4){ x=o; y=t; label=CA;};
+border topA(t=o,-o){ x=t; y=2*h1+w1+2*w2+4*w3+3*h2+w4; label=CA;};
+border leftA(t=2*h1+w1+2*w2+4*w3+3*h2+w4,h1+w1+2*w2+4*w3+3*h2+w4){ x=-o; y=t; label=CA;};
+
+
 
 int CK=5;
 
-border bottomK(t=-Or,Or){ x=t; y=0; label=CK;};
-border rightK(t=0,h1){ x=Or; y=t; label=CK;};
-border topK(t=Or,-Or){ x=t; y=h1; label=CK;};
-border leftK(t=h1,0){ x=-Or; y=t; label=CK;};
+border bottomK(t=-o,o){ x=t; y=0; label=CK;};
+border rightK(t=0,h1){ x=o; y=t; label=CK;};
+border topK(t=o,-o){ x=t; y=h1; label=CK;};
+border leftK(t=h1,0){ x=-o; y=t; label=CK;};
+
+
+
+int CD=6;
+
+border bottomD(t=-o,-r){ x=t; y=h1+w1+w2+4*w3+3*h2; label=CD;};
+border rightD(t=h1+w1+w2+4*w3+3*h2,h1+w1+2*w2+4*w3+3*h2){ x=-r; y=t; label=CD;};
+border topD(t=-r,-o){ x=t; y=h1+w1+2*w2+4*w3+3*h2; label=CD;};
+border leftD(t=h1+w1+2*w2+4*w3+3*h2,h1+w1+w2+4*w3+3*h2){ x=-o; y=t; label=CD;};
+
+
+
+
+int CE=7;
+
+border bottomE(t=r,o){ x=t; y=h1+w1+w2+4*w3+3*h2; label=CE;};
+border rightE(t=h1+w1+w2+4*w3+3*h2,h1+w1+2*w2+4*w3+3*h2){ x=o; y=t; label=CE;};
+border topE(t=o,r){ x=t; y=h1+w1+2*w2+4*w3+3*h2; label=CE;};
+border leftE(t=h1+w1+2*w2+4*w3+3*h2,h1+w1+w2+4*w3+3*h2){ x=r; y=t; label=CE;};
+
 
 
 border enclosure(t=0,2*pi){x=10*cos(t); y=10*sin(t); label=CB;};
 
 int n=10;
 
-mesh Th = buildmesh(enclosure(3*n)+bottomA(-Or*n)+topA(-Or*n)+rightA(-(2*h1+w1+2*w2+4*w3+3*h2+w4)*n)+leftA(-(2*h1+w1+2*w2+4*w3+3*h2+w4)*n))+bottomK(-Or*n)+topK(-Or*n)+rightK(-(h1)*n)+leftK(-(h1)*n)));
-
+mesh Th = buildmesh(enclosure(3*n)+bottomA(-o*n)+topA(-o*n)+rightA(-(2*h1+w1+2*w2+4*w3+3*h2+w4)*n)+leftA(-(2*h1+w1+2*w2+4*w3+3*h2+w4)*n))+bottomK(-o*n)+topK(-o*n)+rightK(-(h1)*n)+leftK(-(h1)*n))+bottomD(-o*n)+topD(-o*n)+rightD(-(h1+w1+2*w2+4*w3+3*h2)*n)+leftD(-(h1+w1+2*w2+4*w3+3*h2)*n))+bottomE(r*n)+topE(r*n)+rightE(-(h1+w1+2*w2+4*w3+3*h2)*n)+leftE(-(h1+w1+2*w2+4*w3+3*h2)*n)));
 fespace Vh(Th,P1);
 
 Vh u,v;
