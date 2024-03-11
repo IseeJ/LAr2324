@@ -1,0 +1,24 @@
+int CB=3;
+real w1 = 1.623, h1 = 0.26, w2 = 0.494, w3 = 1.09, h2 = 0.2, w4 = 0.983, Or=4, Ir=2;
+
+
+
+int CA=4;
+
+border bottomA(t=-Or,Or){ x=t; y=h1+w1+2*w2+4*w3+3*h2+w4; label=CA;};
+border rightA(t=h1+w1+2*w2+4*w3+3*h2+w4,2*h1+w1+2*w2+4*w3+3*h2+w4){ x=Or; y=t; label=CA;};
+border topA(t=Or,-Or){ x=t; y=2*h1+w1+2*w2+4*w3+3*h2+w4; label=CA;};
+border leftA(t=2*h1+w1+2*w2+4*w3+3*h2+w4,h1+w1+2*w2+4*w3+3*h2+w4){ x=-Or; y=t; label=CA;};
+
+bottomA(-Or*n)+topA(-Or*n)+rightA(-(2*h1+w1+2*w2+4*w3+3*h2+w4)*n)+leftA(-(2*h1+w1+2*w2+4*w3+3*h2+w4)*n))
+
+int CK=5;
+
+border bottomK(t=-Or,Or){ x=t; y=0; label=CK;};
+border rightK(t=0,h1){ x=Or; y=t; label=CK;};
+border topK(t=Or,-Or){ x=t; y=h1; label=CK;};
+border leftK(t=h1,0){ x=-Or; y=t; label=CK;};
+
+bottomK(-Or*n)+topK(-Or*n)+rightK(-(h1)*n)+leftK(-(h1)*n))
+
+
