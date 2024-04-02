@@ -1,0 +1,147 @@
+
+real w1 = 1.642, h1 = 0.228, w2 = 0.456, w3 = 1.09, h2 = 0.228, w4 = 1.002, o=4, r=2;
+
+
+
+int CA=4;
+
+border bottomA(t=-o,o){ x=t; y=h1+w1+2*w2+4*w3+3*h2+w4; label=CA;};
+border rightA(t=h1+w1+2*w2+4*w3+3*h2+w4,2*h1+w1+2*w2+4*w3+3*h2+w4){ x=o; y=t; label=CA;};
+border topA(t=o,-o){ x=t; y=2*h1+w1+2*w2+4*w3+3*h2+w4; label=CA;};
+border leftA(t=2*h1+w1+2*w2+4*w3+3*h2+w4,h1+w1+2*w2+4*w3+3*h2+w4){ x=-o; y=t; label=CA;};
+
+
+
+int CK=5;
+
+border bottomK(t=-o,o){ x=t; y=0; label=CK;};
+border rightK(t=0,h1){ x=o; y=t; label=CK;};
+border topK(t=o,-o){ x=t; y=h1; label=CK;};
+border leftK(t=h1,0){ x=-o; y=t; label=CK;};
+
+
+
+int CD=6;
+
+border bottomD(t=-o,-r){ x=t; y=h1+w1+w2+4*w3+3*h2; label=CD;};
+border rightD(t=h1+w1+w2+4*w3+3*h2,h1+w1+2*w2+4*w3+3*h2){ x=-r; y=t; label=CD;};
+border topD(t=-r,-o){ x=t; y=h1+w1+2*w2+4*w3+3*h2; label=CD;};
+border leftD(t=h1+w1+2*w2+4*w3+3*h2,h1+w1+w2+4*w3+3*h2){ x=-o; y=t; label=CD;};
+
+
+
+
+int CE=7;
+
+border bottomE(t=r,o){ x=t; y=h1+w1+w2+4*w3+3*h2; label=CE;};
+border rightE(t=h1+w1+w2+4*w3+3*h2,h1+w1+2*w2+4*w3+3*h2){ x=o; y=t; label=CE;};
+border topE(t=o,r){ x=t; y=h1+w1+2*w2+4*w3+3*h2; label=CE;};
+border leftE(t=h1+w1+2*w2+4*w3+3*h2,h1+w1+w2+4*w3+3*h2){ x=r; y=t; label=CE;};
+
+
+int CF=8;
+
+border bottomF(t=-o,-r){ x=t; y=h1+w1+w2+3*w3+3*h2; label=CF;};
+border rightF(t=h1+w1+w2+3*w3+3*h2,h1+w1+w2+3*w3+2*h2){ x=-r; y=t; label=CF;};
+border topF(t=-r,-o){ x=t; y=h1+w1+w2+3*w3+2*h2; label=CF;};
+border leftF(t=h1+w1+w2+3*w3+2*h2,h1+w1+w2+3*w3+3*h2){ x=-o; y=t; label=CF;};
+
+
+
+int CG=9;
+
+border bottomG(t=r,o){ x=t; y=h1+w1+w2+3*w3+3*h2; label=CG;};
+border rightG(t=h1+w1+w2+3*w3+3*h2,h1+w1+w2+3*w3+2*h2){ x=o; y=t; label=CG;};
+border topG(t=o,r){ x=t; y=h1+w1+w2+3*w3+2*h2; label=CG;};
+border leftG(t=h1+w1+w2+3*w3+2*h2,h1+w1+w2+3*w3+3*h2){ x=r; y=t; label=CG;};
+
+
+
+int CFL=10;
+
+border bottomFL(t=-o,-r){ x=t; y=h1+w1+w2+2*w3+2*h2; label=CFL;};
+border rightFL(t=h1+w1+w2+2*w3+2*h2,h1+w1+w2+2*w3+h2){ x=-r; y=t; label=CFL;};
+border topFL(t=-r,-o){ x=t; y=h1+w1+w2+2*w3+h2; label=CFL;};
+border leftFL(t=h1+w1+w2+2*w3+h2,h1+w1+w2+2*w3+2*h2){ x=-o; y=t; label=CFL;};
+
+  
+
+int CFR=11;
+
+border bottomFR(t=r,o){ x=t; y=h1+w1+w2+2*w3+2*h2; label=CFR;};
+border rightFR(t=h1+w1+w2+2*w3+2*h2,h1+w1+w2+2*w3+h2){ x=o; y=t; label=CFR;};
+border topFR(t=o,r){ x=t; y=h1+w1+w2+2*w3+h2; label=CFR;};
+border leftFR(t=h1+w1+w2+2*w3+h2,h1+w1+w2+2*w3+2*h2){ x=r; y=t; label=CFR;};
+
+
+int CGL=12;
+
+border bottomGL(t=-o,-r){ x=t; y=h1+w1+w2+w3+h2; label=CGL;};
+border rightGL(t=h1+w1+w2+w3+h2,h1+w1+w2+w3){ x=-r; y=t; label=CGL;};
+border topGL(t=-r,-o){ x=t; y=h1+w1+w2+w3; label=CGL;};
+border leftGL(t=h1+w1+w2+w3,h1+w1+w2+w3+h2){ x=-o; y=t; label=CGL;};
+
+  
+
+int CGR=13;
+
+border bottomGR(t=r,o){ x=t; y=h1+w1+w2+w3+h2; label=CGR;};
+border rightGR(t=h1+w1+w2+w3+h2,h1+w1+w2+w3){ x=o; y=t; label=CGR;};
+border topGR(t=o,r){ x=t; y=h1+w1+w2+w3; label=CGR;};
+border leftGR(t=h1+w1+w2+w3,h1+w1+w2+w3+h2){ x=r; y=t; label=CGR;};
+
+  
+
+int CHL=14;
+
+border bottomHL(t=-o,-r){ x=t; y=h1+w1+w2; label=CHL;};
+border rightHL(t=h1+w1+w2,h1+w1){ x=-r; y=t; label=CHL;};
+border topHL(t=-r,-o){ x=t; y=h1+w1; label=CHL;};
+border leftHL(t=h1+w1,h1+w1+w2){ x=-o; y=t; label=CHL;};
+
+  
+
+int CHR=15;
+
+border bottomHR(t=r,o){ x=t; y=h1+w1+w2; label=CHR;};
+border rightHR(t=h1+w1+w2,h1+w1){ x=o; y=t; label=CHR;};
+border topHR(t=o,r){ x=t; y=h1+w1; label=CHR;};
+border leftHR(t=h1+w1,h1+w1+w2){ x=r; y=t; label=CHR;};
+
+
+int CCB=20;
+border enclosure1(t=0,2*pi){x=30*cos(t); y=30*sin(t); label=CCB;};
+
+int CB=3;
+int w = 20;
+border bottomCB(t=-w,w){x=t;y=-w;label=CB;};
+border rightCB(t=-w,w){x=w;y=t;label=CB;};
+border topCB(t=w,-w){x=t;y=w;label=CB;};
+border leftCB(t=w,-w){x=-w;y=t;label=CB;};
+
+int n=15;
+
+mesh Th = buildmesh(enclosure1(3*n)+bottomCB(-5*n)+topCB(-5*n)+rightCB(-5*n)+leftCB(-5*n)+bottomA(-o*n)+topA(-o*n)+rightA(-h1*n)+leftA(-h1*n)+bottomD(-r*n)+ topD(-r*n)+rightD(-w2*n)+leftD(-w2*n)+bottomE(-r*n)+topE(-r*n)+rightE(-w2*n)+leftE(-w2*n)+bottomK(-o*n)+topK(-o*n)+rightK(-h1*n)+leftK(-h1*n) + bottomF(r*n)+topF(r*n)+rightF(h1*n)+leftF(h1*n)+bottomG(r*n)+topG(r*n)+rightG(h2*n)+leftG(h2*n)+bottomFL(r*n)+topFL(r*n)+rightFL(h2*n)+leftFL(h2*n)+bottomFR(r*n)+topFR(r*n)+rightFR(h2*n)+leftFR(h2*n)+bottomGL(r*n)+topGL(r*n)+rightGL(h2*n)+leftGL(h2*n)+bottomGR(r*n)+topGR(r*n)+rightGR(h2*n)+leftGR(h2*n)+bottomHL(o*n)+topHL(o*n)+rightHL(w2*n)+leftHL(w2*n)+bottomHR(r*n)+topHR(r*n)+rightHR(w2*n)+leftHR(w2*n));
+
+fespace Vh(Th,P1);
+
+Vh u,v;
+problem Electro(u,v) =
+          int2d(Th)(dx(u)*dx(v) + dy(u)*dy(v))
+        + on(CB,u=0)+on(CA,u=4239)+on(CK,u=-386)+on(CD,u=2750)+on(CE,u=2750)+on(CF,u=2062.5)+on(CG,u=2062.5)+on(CFL, u=1375)+on(CFR, u=1375)+on(CGL, u=687.5)+on(CGR, u=687.5)+on(CHL, u=0)+on(CHR, u=0);
+
+
+real error=0.01;
+for (int i=0;i<1;i++){
+   Electro;
+   Th=adaptmesh(Th,u,err=error);
+   error=error/2.0;
+}
+Electro;
+
+Vh Ex, Ey;
+Ex = -dx(u);
+Ey = -dy(u);
+
+plot(u,value=true);
+
