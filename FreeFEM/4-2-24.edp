@@ -122,10 +122,10 @@ border leftCB(t=w,-w){x=-w;y=t;label=CB;};
 
 int CGMC=16;
 
-border bottomGMC(t=1,2){ x=t; y=h1+w1+w2+4*w3+3*h2+w2/2; label=CGMC;};
-border rightGMC(t=h1+w1+w2+4*w3+3*h2+w2/2,h1+w1+w2+4*w3+3*h2+w2/2){ x=2; y=t; label=CGMC;};
-border topGMC(t=2,1){ x=t; y=h1+w1+w2+4*w3+3*h2+w2/2; label=CGMC;};
-border leftGMC(t=h1+w1+w2+4*w3+3*h2+w2/2,h1+w1+w2+4*w3+3*h2+w2/2){ x=1; y=t; label=CGMC;};
+border bottomGMC(t=-2,2){ x=t; y=h1+w1+w2+4*w3+3*h2+w2/2; label=CGMC;};
+border rightGMC(t=h1+w1+w2+4*w3+3*h2+w2/2,h1+w1+w2+4*w3+3*h2+w2/2+0.1){ x=2; y=t; label=CGMC;};
+border topGMC(t=2,-2){ x=t; y=h1+w1+w2+4*w3+3*h2+w2/2+0.1; label=CGMC;};
+border leftGMC(t=h1+w1+w2+4*w3+3*h2+w2/2+0.1,h1+w1+w2+4*w3+3*h2+w2/2){ x=-2; y=t; label=CGMC;};
 
 
 
