@@ -25,8 +25,8 @@ Vh u;
 u = 0; // Initialize temperature field
 
 // Boundary conditions
-macro inletBoundary(x, y) (x < 1e-6)
-macro outletBoundary(x, y) (x > L - 1e-6)
+macro inletBoundary(x, y) (x < 1e-6 ? 1 : 0)
+macro outletBoundary(x, y) (x > L - 1e-6 ? 1 : 0)
 
 // Inlet temperature in Celsius
 real TinletC = Tinlet - 273.15;
@@ -47,4 +47,5 @@ HeatTransfer;
 
 // Output results
 plot(u, fill=true, value=true);
+
 
