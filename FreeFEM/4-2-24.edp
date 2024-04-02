@@ -119,6 +119,16 @@ border rightCB(t=-w,w){x=w;y=t;label=CB;};
 border topCB(t=w,-w){x=t;y=w;label=CB;};
 border leftCB(t=w,-w){x=-w;y=t;label=CB;};
 
+
+int CGMC=16;
+
+border bottomGMC(t=1,2){ x=t; y=h1+w1+w2+4*w3+3*h2+w2/2; label=CGMC;};
+border rightGMC(t=h1+w1+w2+4*w3+3*h2+w2/2,h1+w1+w2+4*w3+3*h2+w2/2){ x=2; y=t; label=CGMC;};
+border topGMC(t=2,1){ x=t; y=h1+w1+w2+4*w3+3*h2+w2/2; label=CGMC;};
+border leftGMC(t=h1+w1+w2+4*w3+3*h2+w2/2,h1+w1+w2+4*w3+3*h2+w2/2){ x=1; y=t; label=CGMC;};
+
+
+
 int n=15;
 
 mesh Th = buildmesh(enclosure1(3*n)+bottomCB(-5*n)+topCB(-5*n)+rightCB(-5*n)+leftCB(-5*n)+bottomA(-o*n)+topA(-o*n)+rightA(-h1*n)+leftA(-h1*n)+bottomD(-r*n)+ topD(-r*n)+rightD(-w2*n)+leftD(-w2*n)+bottomE(-r*n)+topE(-r*n)+rightE(-w2*n)+leftE(-w2*n)+bottomK(-o*n)+topK(-o*n)+rightK(-h1*n)+leftK(-h1*n) + bottomF(r*n)+topF(r*n)+rightF(h1*n)+leftF(h1*n)+bottomG(r*n)+topG(r*n)+rightG(h2*n)+leftG(h2*n)+bottomFL(r*n)+topFL(r*n)+rightFL(h2*n)+leftFL(h2*n)+bottomFR(r*n)+topFR(r*n)+rightFR(h2*n)+leftFR(h2*n)+bottomGL(r*n)+topGL(r*n)+rightGL(h2*n)+leftGL(h2*n)+bottomGR(r*n)+topGR(r*n)+rightGR(h2*n)+leftGR(h2*n)+bottomHL(o*n)+topHL(o*n)+rightHL(w2*n)+leftHL(w2*n)+bottomHR(r*n)+topHR(r*n)+rightHR(w2*n)+leftHR(w2*n));
