@@ -1,0 +1,49 @@
+// Define constants and parameters
+real L = 1.0; // Length of the tube (m)
+real D = 0.0127; // Inner diameter of the tube (m)
+real Tinlet = 80.0; // Inlet temperature of nitrogen (K)
+real Tconstant = 200.0; // Constant temperature of the tube walls (°C)
+real Q = 5.0e-3; // Flow rate of nitrogen (m^3/s)
+
+// Define material properties
+real k_stainless_steel = 16.3; // Thermal conductivity of stainless steel (W/(m*K))
+real rho_stainless_steel = 7900.0; // Density of stainless steel (kg/m^3)
+real cp_stainless_steel = 500.0; // Specific heat capacity of stainless steel (J/(kg*K))
+
+real k_nitrogen = 0.02583; // Thermal conductivity of nitrogen (W/(m*K))
+real rho_nitrogen = 1.165; // Density of nitrogen (kg/m^3)
+real cp_nitrogen = 1040.0; // Specific heat capacity of nitrogen (J/(kg*K))
+
+// Define mesh and finite element space
+mesh Th = square(10, 10); // Define mesh (adjust as needed)
+fespace Vh(Th, P1); // Define finite element space
+
+// Define trial and test functions
+Vh u, v;
+u[] = 0; // Initialize temperature field
+
+// Define boundary conditions
+func inlet_boundary = (x, y) -> x < 1e-6; // Inlet boundary condition
+func outlet_boundary = (x, y) -> x > L - 1e-6; // Outlet boundary condition
+
+real Tinlet_C = Tinlet - 273.15; // Convert inlet temperature to Celsius
+
+problem HeatTransfer(u, v) = 
+  int2d(Th)(k_stainless_steel/dt * u * v + rho_stainless_steel*cp_stainless_steel*u*v) // Stainless steel tube
+  + int2d(Th)(k_nitrogen/dt * u * v + rho_nitrogen*cp_nitrogen*u*v) // Nitrogen flow
+  - int1d(Th, 1)(k_nitrogen*nv(u)*nv(v)) // Convective flux at inlet
+  - int1d(Th, 2)(k_stainless_steel*nv(u)*nv(v)); // Convective flux at outlet
+  - int1d(Th, 3)(k_stainless_steel*nv(u)*nv(v)); // Conduction through tube walls
+
+// Apply boundary conditions
+HeatTransfer;
+
+// Solve the problem
+real dt = 0.1; // Time step size
+for (real t = 0; t < 1000; t += dt) {
+  HeatTransfer;
+}
+
+// Output results
+real Tout = integrate(u(0,L), Th) / L; // Average temperature at outlet
+cout << "Average outlet temperature: " << Tout << " °C" << endl;
