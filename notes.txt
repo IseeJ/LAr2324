@@ -1,3 +1,11 @@
 download: https://github.com/samplemaker/freefem_matlab_octave_plot/blob/public/release-v2.0/demos/ffmatlib.idp
 include "ffmatlib.idp"
-ffSaveData2(Ex,Ey,"export_data.txt");
+
+//Save mesh
+savemesh(Th,"capacitor.msh");
+//Save finite element space connectivity
+ffSaveVh(Th,Vh,"capacitor_vh.txt");
+//Save some scalar data
+ffSaveData(u,"capacitor_potential.csv");
+//Save a 2D vector field
+ffSaveData2(Ex,Ey,"capacitor_field.csv");
