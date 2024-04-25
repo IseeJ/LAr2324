@@ -1,0 +1,3 @@
+download: https://github.com/samplemaker/freefem_matlab_octave_plot/blob/public/release-v2.0/demos/ffmatlib.idp
+include "ffmatlib.idp"
+ffSaveData2(Ex,Ey,"export_data.txt");
