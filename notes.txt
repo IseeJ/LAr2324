@@ -6,6 +6,10 @@ savemesh(Th,"capacitor.msh");
 //Save finite element space connectivity
 ffSaveVh(Th,Vh,"capacitor_vh.txt");
 //Save some scalar data
-ffSaveData(u,"capacitor_potential.csv");
+ffSaveData(u,"capacitor_potential.txt");
 //Save a 2D vector field
-ffSaveData2(Ex,Ey,"capacitor_field.csv");
+ffSaveData2(Ex,Ey,"capacitor_field.txt");
+
+
+//will try
+ffSaveData2(x,y,"coord.txt");
