@@ -23,6 +23,8 @@ while True:
 
 #Hornet
 
+import serial
+import time
 class SerialRead:
     def getConvectronP():
         ser = serial.Serial(
@@ -67,3 +69,13 @@ class SerialRead:
         value = ser.readline()
     
         return value[4:-1]
+
+
+
+
+
+
+    try:
+    except KeyboardInterrupt:
+        ser.close()
+        print("Closing COM5"
