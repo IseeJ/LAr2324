@@ -17,4 +17,55 @@ while True:
     time.sleep(1)
     y = ser.readline()
     print(y)
+
+
+
+
+#Hornet
+
+import serial
+import time
+
+def getConvectronP():
+    ser = serial.Serial(
+        port='COM5',
+        baudrate = 19200,
+        parity='N',
+        stopbits=1,
+        bytesize=8,
+        timeout=1
+    )
+    ser.write(bytearray(b'#01RDCG1\r'))
+    value = ser.readline()
+    pressure = value[4:-1]
     
+    return pressure
+
+def getIonP():
+    ser = serial.Serial(
+        port='COM5',
+        baudrate = 19200,
+        parity='N',
+        stopbits=1,
+        bytesize=8,
+        timeout=1
+    )
+    ser.write(bytearray(b'#01RD\r'))
+    value = ser.readline()
+    pressure = value[4:-1]
+    
+    return pressure
+    
+def getUnit():
+    ser = serial.Serial(
+        port='COM5',
+        baudrate = 19200,
+        parity='N',
+        stopbits=1,
+        bytesize=8,
+        timeout=1
+    )
+    ser.write(bytearray(b'#01RU\r'))
+    value = ser.readline()
+    
+    return value[4:-1]
