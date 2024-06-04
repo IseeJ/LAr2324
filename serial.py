@@ -79,3 +79,14 @@ class SerialRead:
     except KeyboardInterrupt:
         ser.close()
         print("Closing COM5"
+
+
+
+try:
+    ser = Hornet.openSerial()
+    #print....
+    
+    
+except KeyboardInterrupt:
+    ser.close()
+    print("Closing COM5 port")
