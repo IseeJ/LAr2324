@@ -101,14 +101,17 @@ except KeyboardInterrupt:
 
 
 
-#log to csv
+filename = "Pressurelog.csv"
+with open(filename, 'w') as csvfile:
+    csvwriter = csv.writer(csvfile)
+    csvwriter.writerow(['Timestamp','CGPressure(Torr)','IGPressure(Torr)'])
 try:
-    print('Timestamp','CGPressure(Torr)','IGPressure(Torr)')
     while True:
         now = dt.now()
-        print(now.strftime('%Y%m%d'+'T'+'%H%M%S'),Hornet.getConvectronP(), Hornet.getIonP())
+        csvwriter.writerow([now.strftime('%Y%m%d'+'T'+'%H%M%S'),Hornet.getConvectronP(), Hornet.getIonP()])
         time.sleep(1)
         
 except KeyboardInterrupt:
     exit()
     print("Exiting")
+
