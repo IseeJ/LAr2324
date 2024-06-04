@@ -115,3 +115,25 @@ except KeyboardInterrupt:
     exit()
     print("Exiting")
 
+
+
+
+#final
+
+        
+with open(filename, 'a') as csvfile:
+    headers = ['Timestamp','CGPressure(Torr)','IGPressure(Torr)']
+    writer = csv.DictWriter(csvfile, delimiter=',', lineterminator='\n',fieldnames=headers)
+    if fileEmpty:
+        writer.writeheader() 
+
+    try:
+        while True:
+            now = dt.now()
+            csvwriter.writerow([now.strftime('%Y%m%d'+'T'+'%H%M%S'),Hornet.getConvectronP(), Hornet.getIonP()])
+            time.sleep(1)
+        
+    except KeyboardInterrupt:
+        exit()
+        print("Exiting")
+
