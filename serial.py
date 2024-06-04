@@ -81,6 +81,14 @@ class SerialRead:
         print("Closing COM5"
 
 
+port = "COM5"
+
+with open(filename, 'w') as csvfile:
+    csvwriter = csv.writer(csvfile)
+    csvwriter.writerow(['Timestamp', 'IG Pressure [Torr]','CG Pressure'])
+    csvwriter.writerow([set_angle, time_ms, voltage])
+
+
 
 try:
     ser = Hornet.openSerial()
