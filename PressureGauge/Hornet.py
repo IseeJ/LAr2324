@@ -11,7 +11,20 @@ def openSerial():
     )
     return ser
 
-        
+def IG_on():
+    ser = openSerial()
+    ser.write(bytearray(b'#01IG1\r'))
+
+def IG_off():
+    ser = openSerial()
+    ser.write(bytearray(b'#01IG0\r'))
+    
+def IG_stat():
+    ser = openSerial()
+    ser.write(bytearray(b'#01IGS\r'))
+    value = ser.readline()
+    return value
+    
 def getConvectronP():
     ser = openSerial()
     ser.write(bytearray(b'#01RDCG1\r'))
@@ -28,6 +41,13 @@ def getIonP():
 
     ser.close()
     return float(pressure)
+
+def getIonEcurrent():
+    ser=openSerial()
+    ser.write(bytearray(b'#01RDIGE\r'))
+    value = ser.readline()
+    return str(value)
+    
     
 def getUnit():
     ser=openSerial()
