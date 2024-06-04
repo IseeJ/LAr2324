@@ -137,3 +137,20 @@ with open(filename, 'a') as csvfile:
         exit()
         print("Exiting")
 
+
+#log to csv
+filename = "Pressurelog.csv"
+with open(filename, 'a') as csvfile:
+    csvwriter = csv.writer(csvfile)
+    #csvwriter.writerow(['Timestamp','CGPressure(Torr)','IGPressure(Torr)'])
+    try:
+        while True:
+            now = dt.now()
+            csvwriter.writerow([now.strftime('%Y%m%d'+'T'+'%H%M%S'),Hornet.getConvectronP(), Hornet.getIonP()])
+            print(now.strftime('%Y%m%d'+'T'+'%H%M%S'),Hornet.getConvectronP(), Hornet.getIonP())
+            time.sleep(1)
+        
+    except KeyboardInterrupt:
+        exit()
+        print("Exiting, Saving to Pressurelog.csv")
+
