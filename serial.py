@@ -98,3 +98,17 @@ try:
 except KeyboardInterrupt:
     ser.close()
     print("Closing COM5 port")
+
+
+
+#log to csv
+try:
+    print('Timestamp','CGPressure(Torr)','IGPressure(Torr)')
+    while True:
+        now = dt.now()
+        print(now.strftime('%Y%m%d'+'T'+'%H%M%S'),Hornet.getConvectronP(), Hornet.getIonP())
+        time.sleep(1)
+        
+except KeyboardInterrupt:
+    exit()
+    print("Exiting")
