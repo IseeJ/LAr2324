@@ -1,3 +1,41 @@
+#old version
+
+filename = "Pressure_log.csv"
+with open(filename, 'a') as csvfile:
+    csvwriter = csv.writer(csvfile)
+    csvwriter.writerow(['Date','Timestamp','CGPressure(Torr)'])
+    try:
+        Hornet.IG_off()
+        time.sleep(10)
+        print(Hornet.IG_stat())
+        while Hornet.getConvectronP()>=5e-2:
+            now = dt.now()
+            csvwriter.writerow([now.strftime('%Y%m%d'),now.strftime('%H%M%S'), Hornet.getConvectronP()])
+            print([now.strftime('%Y%m%d'+'T'+'%H%M%S'), Hornet.getConvectronP()])
+        if Hornet.getConvectronP()<5e-2:
+            print("Turning on IG")
+            Hornet.IG_on()
+            time.sleep(10)
+            print(Hornet.IG_stat())
+            print(Hornet.getIonEcurrent())
+            csvwriter.writerow(['Date','Timestamp','IGPressure(Torr)'])
+        while Hornet.getConvectronP()<5e-2:
+            now = dt.now()
+            csvwriter.writerow([now.strftime('%Y%m%d'),now.strftime('%H%M%S'), Hornet.getIonP()])
+            print(now.strftime('%Y%m%d'+'T'+'%H%M%S'), Hornet.getIonP())
+            time.sleep(10)
+        if Hornet.getConvectronP()>=5e-2:
+            Hornet.IG_off()
+            time.sleep(10)
+            print(Hornet.IG_stat())
+            
+    except KeyboardInterrupt:
+        exit()
+        print("Exiting, Saving to Pressure_log.csv")
+
+
+
+#modified
 import csv
 import time
 from datetime import datetime as dt
