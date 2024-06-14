@@ -18,7 +18,7 @@ def latest_data(dat_file):
         return latest_entry
    
     
-def update_image(image_path, CH2,CH3,CH4,CH6,timestamp):
+def update_image(image_path, CH2,CH3,CH4,timestamp):
     img = mpimg.imread(image_path)
     plt.figure(dpi=200)
     plt.imshow(img)
@@ -38,8 +38,8 @@ def update_image(image_path, CH2,CH3,CH4,CH6,timestamp):
     #plt.text(1750,730, f"CH5: {CH5} °C", fontsize=8, color='magenta', fontweight='bold')
     #plt.scatter(1750,660,color='magenta',edgecolors='white')
     
-    plt.text(1470,1300, f"AIN6: {CH6} °C", fontsize=8, color='blue', fontweight='bold')
-    plt.scatter(1500,1200,color='blue',edgecolors='white')
+    #plt.text(1470,1300, f"AIN6: {CH6} °C", fontsize=8, color='blue', fontweight='bold')
+    #plt.scatter(1500,1200,color='blue',edgecolors='white')
     
     #plt.text(1140,1470, f"CH7: {CH7} °C", fontsize=8, color='blue', fontweight='bold')
     #plt.scatter(1140,1400,color='blue',edgecolors='white')
@@ -50,6 +50,7 @@ def update_image(image_path, CH2,CH3,CH4,CH6,timestamp):
 
 csv_file = 'LabJ.dat'
 #csv_file = 'data_2.dat'
+#csv_file = 'C:\Users\rga\Desktop\LJLogfinal\data_2.dat'
 
 latest_entry = latest_data(csv_file)
 if latest_entry:
@@ -59,10 +60,10 @@ if latest_entry:
     CH3 = round(float(latest_entry[3]),2)
     CH4 = round(float(latest_entry[5]),2)
     #CH5 = float(latest_entry[5])
-    CH6 = round(float(latest_entry[7]),2)
+    #CH6 = round(float(latest_entry[7]),2)
     #CH7 = float(latest_entry[7])
     
-    update_image(img_path, CH2,CH3,CH4,CH6, timestamp)
+    update_image(img_path, CH2,CH3,CH4,timestamp)
     
     
 if __name__ == "__main__":
@@ -78,7 +79,7 @@ if __name__ == "__main__":
                 CH3 = round(float(latest_entry[3]),2)
                 CH4 = round(float(latest_entry[5]),2)
                 #CH5 = float(latest_entry[5])
-                CH6 = round(float(latest_entry[7]),2)
+                #CH6 = round(float(latest_entry[7]),2)
                 #CH7 = float(latest_entry[7])
         
                 clear_output(wait=True) 
