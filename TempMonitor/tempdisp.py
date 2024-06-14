@@ -83,7 +83,7 @@ if __name__ == "__main__":
                 #CH7 = float(latest_entry[7])
         
                 clear_output(wait=True) 
-                update_image(img_path, CH2,CH3,CH4,CH6,timestamp)
+                update_image(img_path, CH2,CH3,CH4,timestamp)
                 
     except KeyboardInterrupt:
             print("stop")
