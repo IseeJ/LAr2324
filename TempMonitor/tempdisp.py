@@ -23,8 +23,8 @@ def update_image(image_path, CH2,CH3,CH4,timestamp):
     plt.figure(dpi=200)
     plt.imshow(img)
 
-    #plt.text(430, 420, f"CH1: {CH1} °C", fontsize=8, color='black', fontweight='bold',)
-    #plt.scatter(390,350,color='black',edgecolors='white')
+    plt.text(430, 420, f"T3", fontsize=8, color='black', fontweight='bold',)
+    plt.scatter(390,350,color='black',edgecolors='white')
     
     plt.text(450, 780, f"AIN0: {CH2} °C", fontsize=8, color='white', fontweight='bold')
     plt.scatter(500,820,color='white',edgecolors='black')
@@ -35,14 +35,14 @@ def update_image(image_path, CH2,CH3,CH4,timestamp):
     plt.text(120,1480, f"AIN4: {CH4} °C", fontsize=8, color='lime', fontweight='bold')
     plt.scatter(300,1400,color='lime',edgecolors='white')
 
-    #plt.text(1750,730, f"CH5: {CH5} °C", fontsize=8, color='magenta', fontweight='bold')
-    #plt.scatter(1750,660,color='magenta',edgecolors='white')
+    plt.text(1750,730, f"T2", fontsize=8, color='magenta', fontweight='bold')
+    plt.scatter(1750,660,color='magenta',edgecolors='white')
     
-    #plt.text(1470,1300, f"AIN6: {CH6} °C", fontsize=8, color='blue', fontweight='bold')
-    #plt.scatter(1500,1200,color='blue',edgecolors='white')
+    plt.text(1470,1300, f"T4", fontsize=8, color='deepskyblue', fontweight='bold')
+    plt.scatter(1500,1200,color='deepskyblue',edgecolors='white')
     
-    #plt.text(1140,1470, f"CH7: {CH7} °C", fontsize=8, color='blue', fontweight='bold')
-    #plt.scatter(1140,1400,color='blue',edgecolors='white')
+    plt.text(1140,1470, f"T1", fontsize=8, color='blue', fontweight='bold')
+    plt.scatter(1140,1400,color='blue',edgecolors='white')
     
     plt.axis('off')
     plt.title(timestamp)  
