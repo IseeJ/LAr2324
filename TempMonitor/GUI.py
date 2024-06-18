@@ -28,15 +28,13 @@ class MplCanvas(FigureCanvas):
         self.timer.timeout.connect(self.update_image)
         self.timer.start(1000)  
     
-    #for .csv file (test w/ fakedata)
     def latest_datacsv(self, csv_file):
         with open(csv_file, 'r') as file:
             data = csv.reader(file)
             for row in data:
                 latest_entry = row
             return latest_entry
-    
-    #for .dat file (from T7, use index 1,3,5,.. for 7 channels)
+     
     def latest_datadat(self, dat_file):
         with open(dat_file, 'r') as file:
             lines = file.readlines()
@@ -45,8 +43,8 @@ class MplCanvas(FigureCanvas):
             return latest_entry
     
     def update_image(self):
-        #clear plot to update
-        self.axes.cla()
+
+        self.axes.cla() # Clear the canvas.
         
         #old code
         new_entry = self.latest_datacsv(self.csv_file)
@@ -66,32 +64,33 @@ class MplCanvas(FigureCanvas):
             #plot image 
             img = mpimg.imread('Tempread/Diagram.png')  
             self.axes.imshow(img)
-            
+            self.fontsize = 10
             #scatter plot on top of img 
-            self.axes.text(430, 420, f"CH1: {CH1} °C", fontsize=8, color='black', fontweight='bold')
+            self.axes.text(430, 420, f"CH1: {CH1} °C", fontsize=self.fontsize, color='black', fontweight='bold')
             self.axes.scatter(390, 350, color='black', edgecolors='white')
 
-            self.axes.text(450, 780, f"CH2: {CH2} °C", fontsize=8, color='white', fontweight='bold')
+            self.axes.text(450, 780, f"CH2: {CH2} °C", fontsize=self.fontsize, color='white', fontweight='bold')
             self.axes.scatter(500, 820, color='white', edgecolors='black')
 
-            self.axes.text(470, 1170, f"CH3: {CH3} °C", fontsize=8, color='red', fontweight='bold')
+            self.axes.text(470, 1170, f"CH3: {CH3} °C", fontsize=self.fontsize, color='red', fontweight='bold')
             self.axes.scatter(470, 1100, color='red', edgecolors='white')
 
-            self.axes.text(300, 1470, f"CH4: {CH4} °C", fontsize=8, color='lime', fontweight='bold')
+            self.axes.text(300, 1470, f"CH4: {CH4} °C", fontsize=self.fontsize, color='lime', fontweight='bold')
             self.axes.scatter(300, 1400, color='lime', edgecolors='white')
 
-            self.axes.text(1750, 730, f"CH5: {CH5} °C", fontsize=8, color='magenta', fontweight='bold')
+            self.axes.text(1600, 730, f"CH5: {CH5} °C", fontsize=self.fontsize, color='magenta', fontweight='bold')
             self.axes.scatter(1750, 660, color='magenta', edgecolors='white')
 
-            self.axes.text(1500, 1270, f"CH6: {CH6} °C", fontsize=8, color='cyan', fontweight='bold')
+            self.axes.text(1500, 1270, f"CH6: {CH6} °C", fontsize=self.fontsize, color='cyan', fontweight='bold')
             self.axes.scatter(1500, 1200, color='cyan', edgecolors='white')
 
-            self.axes.text(1140, 1470, f"CH7: {CH7} °C", fontsize=8, color='blue', fontweight='bold')
+            self.axes.text(1140, 1470, f"CH7: {CH7} °C", fontsize=self.fontsize, color='blue', fontweight='bold')
             self.axes.scatter(1140, 1400, color='blue', edgecolors='white')
             
             
             self.axes.set_title(timestamp)
             self.axes.axis('off')
+            # Trigger the canvas to update and redraw.
             self.draw()
             
 
