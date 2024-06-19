@@ -122,8 +122,8 @@ class MainWindow(QtWidgets.QMainWindow):
         self.temperature_T2.append(T2_d)
 
     def plotData(self):
-        self.line_T1.setData(self.time, self.temperature_T1)
-        self.line_T2.setData(self.time, self.temperature_T2)
+        self.line_T1.setData(self.time, self.temperature_T1, name="T1")
+        self.line_T2.setData(self.time, self.temperature_T2, name="T2")
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
