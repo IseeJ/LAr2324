@@ -130,8 +130,8 @@ class MainWindow(QtWidgets.QMainWindow):
     
         current_time = (datetime.now() - self.start_time).seconds / 60
         self.time.append(current_time)
-        self.temperature_T1.append(T1_d)
-        self.temperature_T2.append(T2_d)
+        self.temperature_T1.append(T1)
+        self.temperature_T2.append(T2)
 
     def plotData(self):
         self.line_T1.setData(self.time, self.temperature_T1, name="T1")
