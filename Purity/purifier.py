@@ -113,8 +113,7 @@ class MainWindow(QtWidgets.QMainWindow):
 app = QtWidgets.QApplication(sys.argv)
 serial_port = '/dev/cu.usbserial-110'
 baud_rate = 38400
-MainWindow(serial_port, baud_rate)
-window.show()
+MainWindow(serial_port, baud_rate).show()
 app.exec_()
 
 
