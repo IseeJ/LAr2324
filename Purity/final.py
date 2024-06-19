@@ -101,9 +101,9 @@ class MainWindow(QtWidgets.QMainWindow):
         time.sleep(1) #s                                                                                                                                                                                                                                        
         response = self.ser.read(37)
         response_hex = response.hex()
+        """
         bits_response = ' '.join(response_hex[i:i+2] for i in range(0, len(response_hex), 2))
         pairs = bits_response.split()
-
         # T1                                                                                                                                                                                                                                                    
         pair_18 = pairs[17]  # 18th bit                                                                                                                                                                                                                         
         pair_17 = pairs[16]  # 17th bit                                                                                                                                                                                                                         
@@ -115,7 +115,19 @@ class MainWindow(QtWidgets.QMainWindow):
         pair_19 = pairs[18]  # 19th bit                                                                                                                                                                                                                         
         T2 = pair_20 + pair_19
         T2_d = int(T2, 16) / 10
-
+        """
+        T1 = int(response_hex[34:36] + response_hex[32:34], 16) / 10  # T1                                 
+        T2 = int(response_hex[38:40] + response_hex[36:38], 16) / 10  # T2                                 
+        T3 = int(response_hex[42:44] + response_hex[40:42], 16) / 10  # T3                                 
+        T4 = int(response_hex[46:48] + response_hex[44:46], 16) / 10  # T4
+    
+        T5 = int(response_hex[50:52] + response_hex[48:50], 16) / 10  # T5                                 
+        T6 = int(response_hex[54:56] + response_hex[52:54], 16) / 10  # T6                                 
+        T7 = int(response_hex[58:60] + response_hex[56:58], 16) / 10  # T7                                
+        T8 = int(response_hex[62:64] + response_hex[60:62], 16) / 10  # T8
+    
+        print(f"T1: {T1}, T2: {T2}, T3: {T3}, T4: {T4}\nT5: {T5}, T6: {T6}, T7: {T7}, T8: {T8}")
+    
         current_time = (datetime.now() - self.start_time).seconds / 60
         self.time.append(current_time)
         self.temperature_T1.append(T1_d)
