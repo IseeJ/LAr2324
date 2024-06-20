@@ -3,7 +3,7 @@ import sys
 import serial
 import json
 from PyQt5 import QtCore, QtGui, QtWidgets, uic
-from PyQt5.QtCore import Qt
+from PyQt5.QtCore import Qt, QThread
 
 #from pyqtgraph import PlotWidget, plot
 import pyqtgraph as pg
@@ -45,8 +45,8 @@ class MainWindow(QtWidgets.QMainWindow):
         # prepare for serial communication (this should live elsewhere...)
         # i.e. make a class for serial comm to thermocouple device...
         self.ser = None # serial connection (for data retrieval)
-        self.port = '/dev/tty.usbmodem1101' # this can be obtained from the GUI
-        self.baud = 9600
+        self.port = '/dev/cu.usbserial-110' # this can be obtained from the GUI
+        self.baud = 38400
         self.timeout = 2
         
         # initialize the graphs
@@ -115,20 +115,34 @@ class MainWindow(QtWidgets.QMainWindow):
 
     def getData(self):
         # request data from a serial device
+        """
         val = random.randint(0,100)
         out = str(val).encode('UTF-8')
         self.ser.write(out)
         self.ser.flush()
+        """
+        
+        hex_data = [0x01, 0x16, 0x7B, 0x28, 0x48, 0x4C, 0x45, 0x48, 0x54, 0x43,\
+ 0x34, 0x30, 0x39, 0x35, 0x67, 0x71, 0x29, 0x7D, 0x7E, 0x04]
+        byte_data = bytearray(hex_data)
+        self.ser.write(byte_data)
+        self.ser.flush()
         
         # receive response
         time.sleep(1) # may not be needed...
+        """
         print('\n')
         print('tx: ',end='')
         print(out)
         rec = self.ser.readline()
         print('rx: ',end='')
         print(rec)
-        yy = float(rec.decode('UTF-8'))
+        """
+        
+        response = self.ser.readline()
+        response_hex = response.hex()
+        
+        yy = float(response_hex)
         xx = self.model.lenData()
         self.addPoint(xx, yy)
         self.plotData()
