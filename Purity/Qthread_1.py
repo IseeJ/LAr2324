@@ -17,6 +17,9 @@ from PyQt5.QtWidgets import (
 logging.basicConfig(format="%(message)s", level=logging.INFO)
 
 
+class WorkerSignals(QObject):
+    result = pyqtSignal(float)
+
 # Qthread code from https://realpython.com/python-pyqt-qthread/
 # 1. Subclass Worker, QRunnable                                                           
 class Worker(QRunnable):
@@ -47,6 +50,7 @@ class Worker(QRunnable):
                 T1 = int(response_hex[34:36] + response_hex[32:34], 16) / 10  # T\
 1                                                                                 
                 logging.info(f"T1: {T1}")
+                self.signals.result.emit(T1)
             else:
                 logging.warning("None")
         except serial.SerialException as e:
@@ -89,7 +93,12 @@ class Window(QMainWindow):
             pool.start(runnable)                                                  
         '''
         runnable = Worker(1)
+        runnable.signals.result.connect(self.updateT1)  # Connect the signal to the slot
         pool.start(runnable)
+    
+    @pyqtSlot(float)
+    def updateT1(self, T1):
+        self.T1Label.setText(f"T1: {T1:.1f}")
 
 
 app = QApplication(sys.argv)
