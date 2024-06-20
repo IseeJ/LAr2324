@@ -1,137 +1,142 @@
-import sys
 import time
-from datetime import datetime
+import sys
 import serial
-from PyQt5 import QtCore, QtWidgets
+import json
+from PyQt5 import QtCore, QtGui, QtWidgets, uic
+from PyQt5.QtCore import Qt
+
+#from pyqtgraph import PlotWidget, plot
 import pyqtgraph as pg
+
 from mainwindow import Ui_MainWindow
+
+import random
 
 class PurifierModel(QtCore.QAbstractListModel):
     def __init__(self, *args, **kwargs):
         super(PurifierModel, self).__init__(*args, **kwargs)
 
-    data = [3,5,1]
+    xdata = []
+    ydata = []
         
-    def getData(self):
-        return self.data
+    def lenData(self):
+        return len(self.ydata)
 
-    def appendData(self, val):
-        self.data.append(val)
+    def appendData(self, x, y):
+        self.xdata.append(x)
+        self.ydata.append(y)
 
     def reset(self):
-        self.data = []
+        self.xdata = []
+        self.ydata = []
 
+        
 class MainWindow(QtWidgets.QMainWindow):
-    def __init__(self, serial_port, baud_rate):
+    def __init__(self):
         super(MainWindow, self).__init__()
 
-        # Initialize serial connection
-        self.ser = serial.Serial(serial_port, baud_rate, timeout=10)
-        
-        # Setup user interface from Designer
+        # setup user interface from Designer
+        # see: https://www.riverbankcomputing.com/static/Docs/PyQt5/designer.html
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
         
         self.model = PurifierModel()
 
-        # Initialize the graphs
+        # prepare for serial communication (this should live elsewhere...)
+        # i.e. make a class for serial comm to thermocouple device...
+        self.ser = None # serial connection (for data retrieval)
+        self.port = '/dev/tty.usbmodem1101' # this can be obtained from the GUI
+        self.baud = 9600
+        self.timeout = 2
+        
+        # initialize the graphs
         self.initGraph()
 
-        # Connect signals/slots
+        # connect signals/slots
         self.ui.startStopButton.pressed.connect(self.toggleRun)
         self.ui.clearButton.pressed.connect(self.clearPlot)
 
-        # Setup a timer for updating the plot
+        # setup a timer (for updating the plot).
+        # eventually, the timer would be replaced by the arrival of serial data
+        # which would trigger a plot update
         self.timer = QtCore.QTimer()
-        self.timer.setInterval(300) # ms
-        self.timer.timeout.connect(self.update)
+        self.timer.setInterval(1000) # ms
+        self.timer.timeout.connect(self.getData)
         
-        self.time = []
-        self.temperature_T1 = []
-        self.temperature_T2 = []
-        self.start_time = datetime.now()
-
     def initGraph(self):
         self.ui.graphWidget.setBackground("w")
 
-        # Define color for lines on graph
-        pen_T1 = pg.mkPen(color=(255, 0, 0))
-        pen_T2 = pg.mkPen(color=(0, 0, 255))
+        # define color for line on graph
+        pen = pg.mkPen(color=(255, 0, 0))
         
-        self.line_T1 = self.ui.graphWidget.plot(pen=pen_T1, name="T1")
-        self.line_T2 = self.ui.graphWidget.plot(pen=pen_T2, name="T2")
+        self.line = self.ui.graphWidget.getPlotItem().plot(pen=pen)
+        self.plotData()
 
-        self.ui.graphWidget.setLabel("left", "Temperature (°C)", color="red", size="18px")
-        self.ui.graphWidget.setLabel("bottom", "Time (min)", color="red", size="18px")
-        self.ui.graphWidget.addLegend()
-        self.ui.graphWidget.showGrid(x=True, y=True)
-        self.ui.graphWidget.setYRange(20, 40)
-
-        self.runningFlag = False
+        self.ui.graphWidget.setLabel("left", "y-values [arb.]")
+        self.ui.graphWidget.setLabel("bottom", "Time [arb.]")
 
     def clearPlot(self):
         self.model.reset()
-        self.time.clear()
-        self.temperature_T1.clear()
-        self.temperature_T2.clear()
         self.plotData()
-
+        
     def toggleRun(self):
-        if self.runningFlag:
+        if self.ser is not None:
             self.stopRun()
         else:
             self.startRun()
 
     def startRun(self):
-        self.runningFlag = True
+        print('starting serial comm')
+        # open serial connection
+        self.serialOpen()
+        # start timer for serial transmission
         self.timer.start()
         
     def stopRun(self):
-        self.runningFlag = False
+        print('ending serial comm')
+        self.serialClose()
+        # stop the timer for serial transmission
         self.timer.stop()
 
-    def update(self):
-        self.readSerialData()
-        self.plotData()
+    def serialOpen(self):
+        self.ser = serial.Serial(self.port, self.baud, timeout=self.timeout)
+        time.sleep(1) # [seconds] necessary only because opening the port reboots the arduino! not needed for actual operation with thermocouple readout
 
-    def readSerialData(self):
-        hex_data = [0x01, 0x16, 0x7B, 0x28, 0x48, 0x4C, 0x45, 0x48, 0x54, 0x43, 0x34, 0x30, 0x39, 0x35, 0x67, 0x71, 0x29, 0x7D, 0x7E, 0x04]
-        byte_data = bytearray(hex_data)
-        self.ser.write(byte_data)
-        time.sleep(2)
-        response = self.ser.read(37)
-        response_hex = response.hex()
-        bits_response = ' '.join(response_hex[i:i+2] for i in range(0, len(response_hex), 2))
-        pairs = bits_response.split()
+    def serialClose(self):
+        self.ser.close()
+        self.ser = None
+        
+    def addPoint(self, xx, yy):
+        self.model.appendData(xx, yy)
 
-        # T1
-        pair_18 = pairs[17]  # 18th bit
-        pair_17 = pairs[16]  # 17th bit
-        T1 = pair_18 + pair_17
-        T1_d = int(T1, 16) / 10
-
-        # T2
-        pair_20 = pairs[19]  # 20th bit
-        pair_19 = pairs[18]  # 19th bit
-        T2 = pair_20 + pair_19
-        T2_d = int(T2, 16) / 10
-
-        current_time = (datetime.now() - self.start_time).seconds / 60
-        self.time.append(current_time)
-        self.temperature_T1.append(T1_d)
-        self.temperature_T2.append(T2_d)
 
     def plotData(self):
-        self.line_T1.setData(self.time, self.temperature_T1)
-        self.line_T2.setData(self.time, self.temperature_T2)
-        
-if __name__ == "__main__":
-    app = QtWidgets.QApplication(sys.argv)
-    serial_port = '/dev/cu.usbserial-110'
-    baud_rate = 38400
-    window = MainWindow(serial_port, baud_rate)
-    window.show()
-    sys.exit(app.exec_())
+        self.line.setData(self.model.xdata, self.model.ydata)
 
+    def getData(self):
+        # request data from a serial device
+        val = random.randint(0,100)
+        out = str(val).encode('UTF-8')
+        self.ser.write(out)
+        self.ser.flush()
+        
+        # receive response
+        time.sleep(1) # may not be needed...
+        print('\n')
+        print('tx: ',end='')
+        print(out)
+        rec = self.ser.readline()
+        print('rx: ',end='')
+        print(rec)
+        yy = float(rec.decode('UTF-8'))
+        xx = self.model.lenData()
+        self.addPoint(xx, yy)
+        self.plotData()
+        
+        
+app = QtWidgets.QApplication(sys.argv)
+window = MainWindow()
+window.show()
+app.exec_()
 
 
