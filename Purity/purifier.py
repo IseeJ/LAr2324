@@ -30,7 +30,42 @@ class PurifierModel(QtCore.QAbstractListModel):
         self.xdata = []
         self.ydata = []
 
+class Worker(QObject):
+    finished = pyqtSignal()
+    dataReceived = pyqtSignal(float)
+
+    def __init__(self, port, baud, timeout):
+        super(SerialWorker, self).__init__()
+        self.port = port
+        self.baud = baud
+        self.timeout = timeout
+        self.running = False
+
+    def run(self):
+        self.running = True
+        self.ser = serial.Serial(self.port, self.baud, timeout=self.timeout)
+        time.sleep(1)
         
+        while self.running:
+            hex_data = [0x01, 0x16, 0x7B, 0x28, 0x48, 0x4C, 0x45, 0x48, 0x54, 0x43, 0x34, 0x30, 0x39, 0x35, 0x67, 0x71, 0x29, 0x7D, 0x7E, 0x04]
+            byte_data = bytearray(hex_data)
+            self.ser.write(byte_data)
+            self.ser.flush()
+            
+            response = self.ser.readline()
+            response_hex = response.hex()
+            T1 = int(response_hex[34:36] + response_hex[32:34], 16) / 10  # T1
+            
+            self.dataReceived.emit(T1)
+            time.sleep(1)
+
+        self.ser.close()
+        self.finished.emit()
+
+    def stop(self):
+        self.running = False
+        
+
 class MainWindow(QtWidgets.QMainWindow):
     def __init__(self):
         super(MainWindow, self).__init__()
@@ -44,10 +79,25 @@ class MainWindow(QtWidgets.QMainWindow):
 
         # prepare for serial communication (this should live elsewhere...)
         # i.e. make a class for serial comm to thermocouple device...
+        """
         self.ser = None # serial connection (for data retrieval)
         self.port = '/dev/cu.usbserial-110' # this can be obtained from the GUI
         self.baud = 38400
         self.timeout = 2
+        """
+        self.port = '/dev/cu.usbserial-110'  # this can be obtained from the GUI
+        self.baud = 38400
+        self.timeout = 2
+        
+        self.initGraph()
+
+        #signals/slots
+        self.ui.startStopButton.pressed.connect(self.toggleRun)
+        self.ui.clearButton.pressed.connect(self.clearPlot)
+
+        #worker thread
+        self.thread = None
+        self.worker = None
         
         # initialize the graphs
         self.initGraph()
@@ -78,7 +128,7 @@ class MainWindow(QtWidgets.QMainWindow):
     def clearPlot(self):
         self.model.reset()
         self.plotData()
-        
+
     def toggleRun(self):
         if self.ser is not None:
             self.stopRun()
