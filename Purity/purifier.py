@@ -141,8 +141,9 @@ class MainWindow(QtWidgets.QMainWindow):
         
         response = self.ser.readline()
         response_hex = response.hex()
+        T1 = int(response_hex[34:36] + response_hex[32:34], 16) / 10  # T1  
         
-        yy = float(response_hex)
+        yy = float(T1)
         xx = self.model.lenData()
         self.addPoint(xx, yy)
         self.plotData()
