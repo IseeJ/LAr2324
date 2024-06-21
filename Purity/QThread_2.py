@@ -13,6 +13,7 @@ from PyQt5.QtWidgets import (
     QWidget,
 )
 
+# Qthread code from https://realpython.com/python-pyqt-qthread/
 logging.basicConfig(format="%(message)s", level=logging.INFO)
 
 # Define a WorkerSignals class to handle signals
