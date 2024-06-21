@@ -3,7 +3,7 @@ import sys
 import time
 import serial
 
-from PyQt5.QtCore import Qt, QThread, pyqtSignal, pyqtSlot
+from PyQt5.QtCore import Qt, QThread, pyqtSignal, pyqtSlot, QObject
 from PyQt5.QtWidgets import (
     QApplication,
     QLabel,
