@@ -12,8 +12,11 @@ bucket = "slowcontrol"
 
 #stoptime = datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ")                                                                                                                      
 #starttime = (datetime.utcnow() - timedelta(hours=4)).strftime("%Y-%m-%dT%H:%M:%SZ")                                                                                              
-starttime = '2025-02-26T07:50:00Z'
-stoptime = '2025-02-26T12:00:00Z'
+
+
+starttime = '2025-02-23T04:12:38Z'
+stoptime = '2025-03-20T21:11:38Z'
+
 
 #client = InfluxDBClient(url=url, token=token, org=org)                                                                                                                           
 
@@ -42,4 +45,4 @@ df = pd.DataFrame(data)
 df.sort_values(by="time", inplace=True, na_position='first')
 df.to_csv(f"{starttime}_{stoptime}.csv", index=False)
 print(df)
-print("OK") 
+print("OK")
